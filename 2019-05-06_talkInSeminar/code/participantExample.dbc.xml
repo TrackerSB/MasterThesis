@@ -1,0 +1,13 @@
+[...]
+
+<participant id="ego" model="ETK800">
+    <initialState x="0" y="0" movementMode="MANUAL" orientation="0"/>
+    <movement>
+        <waypoint x="50" y="0" movementMode="MANUAL" tolerance="1"/>
+        <waypoint x="80" y="20" movementMode="AUTONOMOUS" tolerance="1"/>
+        <waypoint x="100" y="20" movementMode="MANUAL" tolerance="1"/>
+    </movement>
+    [...]
+</participant>
+
+[...]

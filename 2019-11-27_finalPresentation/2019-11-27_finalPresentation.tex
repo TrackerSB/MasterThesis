@@ -1,0 +1,228 @@
+% Option must be passed this way (See https://tex.stackexchange.com/a/74828/187883}
+\PassOptionsToPackage{dvipsnames}{xcolor}
+
+\documentclass[aspectratio=169]{beamer}
+
+% Should be first
+\usepackage[english]{babel}
+\usepackage{fontspec}
+\usepackage[utf8]{luainputenc}
+
+% Must be included before tikz when using dvipsnames option (See https://en.wikibooks.org/wiki/LaTeX/Colors#The_68_standard_colors_known_to_dvips)
+\usepackage{xcolor}
+
+% No special constraints on order
+\usepackage{academicons}
+\usepackage[%
+        backend=biber,
+        safeinputenc,
+        sorting=none,
+        style=numeric
+    ]{biblatex}
+\usepackage{calc}
+\usepackage{csquotes}
+\usepackage{pgf-umlsd}
+\usepackage{multicol}
+\usepackage{nameref}
+\usepackage{smartdiagram}
+\usepackage{svg}
+\usepackage{tikz}
+\usepackage[absolute, overlay]{textpos}
+\usepackage{xspace}
+
+\usetikzlibrary{positioning}
+
+\input{commands.tex}
+
+\title{DriveBuild}
+\subtitle{Automation of Simulation-based Testing\\of Autonomous Vehicles}
+\author{\orcid{0000-0002-6780-6055}Stefan Huber} % chktex 8
+\institute{University of Passau}
+\titlegraphic{\includegraphics[height=.10\textheight]{media/logoUniPassau.jpg}}
+\date{November 27, 2019}
+
+\usetheme{Rochester}
+\beamertemplatenavigationsymbolsempty%
+\newcommand{\defaultfootline}{%
+    \raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[10pt]{\scriptsize\insertframenumber}}}
+}
+\setbeamertemplate{footline}{\defaultfootline}
+
+\addbibresource{biblio.bib}
+\nocite{*}
+\renewcommand*{\bibfont}{\scriptsize}
+
+\begin{document}
+
+{
+    \setbeamertemplate{footline}{}
+    \maketitle%
+}
+
+\section{Motivation}
+\subsection{Background}
+% Driving is dangerous
+\imageFrame{media/carCrashes.png}
+
+% Most common reasons could be avoided with AVs
+\imageFrame[5pt]{media/car-accident-statistics_causes.png} % chktex 8
+
+% Companies want to make the world safer
+\imageFrame{media/save-the-world-2.jpg}
+
+% Many companies work on AVs
+\imageFrame[60pt]{media/corps-in-autonomous-header.png}
+
+% Companies invest lots of money
+\imageFrame[15pt]{media/Autonomous-Vehicle-Investments-Are-Poised-to-Set-a-New-Record-in-2019.png}
+
+% People do not trust AVs
+% \imageFrame{media/chartoftheday_13450_perceived_safety_of_self_driving_cars_n.jpg} % chktex 8
+
+% AVs are not safe
+\imageFrame{media/lsaqi1oct4aguj5dd7jm.png}
+
+% Number of AV crashes increases
+\imageFrame{media/avCrashes.png}
+
+% Testing required
+\imageFrame[25pt]{media/testing.jpg}
+
+% Testing requires many cars
+% \imageFrame{media/self-parking-vehicles-i-3-1000x675.jpg} % chktex 8 chktex 29
+
+% Testing is very expensive
+\imageFrame[15pt]{media/2ef78b50bedc31ec-2048x1024.jpg} % chktex 29
+
+% Testing takes lots of time
+\imageFrame{media/clocks.jpg}
+
+% Drive more miles to train AIs
+% \imageFrame{media/waymo_10_million_miles.png} % cktex 8
+
+% Infeasible without simulations
+\imageFrame[15pt]{media/unnamed__1_.jpg} % chktex 8
+
+\subsection{Problems and Requirements}
+% What do testers need?
+\imageFrame{media/How-good-are-you-at-I-dont-know.jpg}
+
+% Read lots of papers about testing AVs
+\imageFrame{media/lotsOfPaper.jpeg}
+
+% Use students as testers
+\input{slides/studentsAsTesters.tex}
+
+% Goals of testers
+\input{slides/goalsOfTesters.tex}
+
+% Problems testers share
+\input{slides/problemsTestersFace.tex}
+
+\section{Approach of \drivebuild{}}
+% Which aspects does DriveBuild handle?
+\definecolor{colorFormalize}{HTML}{008148}
+\definecolor{colorExecute}{HTML}{C6C013}
+\definecolor{colorVerify}{HTML}{EF8A17}
+\definecolor{colorGatherData}{HTML}{EF2917}
+\input{slides/handledAspects.tex}
+
+\subsection{Formalization}
+% Why formalization?
+\input{slides/whyFormalization.tex}
+
+\subsection{Execution}
+% Why micro services and distribution?
+\input{slides/whyExecution.tex}
+
+\subsection{Runtime Verification}
+% Why synchronous simulation?
+\input{slides/whySynchronousSimulation.tex}
+
+\subsection{Data Collection}
+% Why serialization?
+\input{slides/whySerialization.tex}
+
+\section{Evaluation}
+% What did I evaluate?
+\input{slides/whatEvaluated.tex}
+
+% How did I check generality?
+\input{slides/generalityMethod.tex}
+
+% Conclusion of generality evaluation?
+\input{slides/generalityConclusions.tex}
+
+% How did I check scalability?
+\input{slides/scalabilityMethod.tex}
+
+% Scalability on single real node
+\imageFrameSvg{diagrams/diagram20a.svg}
+
+% VMs are unreliable
+\imageFrameSvg{diagrams/diagram18a.svg}
+
+% Conclusions of scalability evaluation
+\input{slides/scalabilityConclusions.tex}
+
+% Where did students struggle?
+\input{slides/studentsStruggle.tex}
+
+% Summarize talk
+\input{slides/summarizeTalk.tex}
+
+% Whats next?
+\input{slides/whatsNext.tex}
+
+% \section{Sources}
+% \sectionFrame{}
+% \begin{frame}[allowframebreaks]{Sources}
+%     \printbibliography%
+% \end{frame}
+
+\section{Backup Slides}
+\sectionFrame{}
+
+\subsection{Formalization}
+% What can be formalized?
+\input{slides/componentsOfFormalization.tex}
+
+\subsection{Execution}
+% How are tests distributed?
+\input{slides/dataFlowDistribution.tex}
+
+\subsection{Runtime Verification}
+% What steps does the runtime verification?
+\input{slides/runtimeVerificationSteps.tex}
+
+% How does the client scheme look like?
+\input{slides/clientScheme.tex}
+
+\subsection{Data Collection}
+% Which data is available?
+\input{slides/availableData.tex}
+
+\subsection{Available Metrics}
+% Succeeded/failed/errored/... tests
+\imageFrameSvg{diagrams/diagram12a.svg}
+
+% Visualize start up of tests
+\imageFrameSvg{diagrams/diagram19b.svg}
+
+% Curvature of evolutionary computing
+\imageFrame{diagrams/roadVisualization_G3_translated.png}
+
+% Traveled distance on evolutionary computing
+\imageFrame{diagrams/roadVisualization_G3_traveled.png}
+
+% Execution times of tests
+\imageFrameSvg{diagrams/diagram14a.svg}
+
+% Sizes of goal areas
+\imageFrameSvg{diagrams/diagram13a.svg}
+
+% DeepDriving Example
+\videoFrame{media/2019-10-20_DeepDriving_2.mp4}{{\scshape DeepDriving} Example} % chktex 8
+
+\end{document}
+

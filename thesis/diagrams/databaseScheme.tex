@@ -1,0 +1,45 @@
+\begin{tikzpicture}
+    \node[attribute] (sid) {\key{SimulationID}};
+    \node[attribute, below=0.5 of sid] (environment) {Environment};
+    \node[attribute, below=0.5 of environment] (criteria) {Criteria};
+    \node[attribute, below=0.5 of criteria] (result) {TestResult};
+    \node[attribute, below=0.5 of result] (status) {SimState};
+    \node[attribute, below=0.5 of status] (started) {StartTime};
+    \node[attribute, below=0.5 of started] (finished) {EndTime};
+    \node[entity, right=of result] (test) {Tests};
+
+    \node[ident relationship, right=of test] (of) {in};
+
+    \node[weak entity, right=of of] (trace) {VerficationCycles};
+    \node[attribute, above=of trace.north west, anchor=south] (tick) {\weakkey{Tick}};
+    \node[attribute, above=of trace.north east, anchor=south] (cycleFinished) {EndTime};
+    \node[attribute, below=of of] (vid) {\weakkey{VehicleID}};
+    \node[attribute, below=of vid.south east, anchor=north] (data) {DataResponse};
+    \node[attribute, above=of data.east, anchor=south west] (cycleStarted) {StartTime};
+
+    \node[relationship, above right=1.5 and 0 of test] (submit) {submit};
+
+    \node[entity, above=of submit] (user) {Users};
+    \node[attribute, right=of user] (username) {\key{Username}};
+    \node[attribute, above=0.5 of username] (password) {Password};
+
+    \path
+        (test) edge[bend right] (sid)
+        (test) edge (environment)
+        (test) edge (criteria)
+        (test) edge (result)
+        (test) edge (status)
+        (test) edge (started)
+        (test) edge[bend left] (finished)
+        (trace) edge (data)
+        (trace) edge (vid)
+        (trace) edge (tick)
+        (trace) edge (cycleStarted)
+        (trace) edge (cycleFinished)
+        (trace) edge[total] node[above] {n} (of)
+        (of) edge node[above] {1} (test)
+        (user) edge (username)
+        (user) edge (password)
+        (user) edge node[right] {0...1} (submit)
+        (submit) edge node[above] {n} (test);
+\end{tikzpicture}

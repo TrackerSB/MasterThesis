@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<driveCloudEnvironment xmlns="https://www.drivecloud.com"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="https://www.drivecloud.com driveCloud1.xsd">
+    <author>author</author>
+    <creationDate>date</creationDate>
+
+    <lane id="id">
+        <leftBound>
+            <point x="someX" y="someY" />
+            ...
+            <point [...] />
+        </leftBound>
+        <rightBound>
+            <point [...] />
+            ...
+            <point [...] />
+        </rightBound>
+        <!-- Direction of lanelet? -->
+        <!-- Connection of lanelets? -->
+        <!-- Speed limit of lanelet? -->
+        <!-- Describe using center points and width instead? -->
+        <!-- Disallow certain lanelets for certain AIs? -->
+    </lane>
+    ...
+    <lane [...]>
+        [...]
+    </lane>
+
+    <participant id="id">
+        <initialState>
+            <point [...] />
+            <speed mode="limit|set">speed</speed> <!-- From now on -->
+            <aiControlled>True|False</aiControlled>
+            <orientation>orientation</orientation> <!-- Rad vs deg? -->
+        </initialState>
+        <path>
+            <state>
+                <waypoint x="x"
+                          y="y"
+                          radius="radius" />
+                <speed mode="limit|set">speed</speed> <!-- From now on -->
+                <aiControlled>True|False</aiControlled> <!-- From now on -->
+                <!-- TODO Define destination of AI? --> <!-- FIXME Needed? -->
+            </state>
+            ...
+            <state>
+                [...]
+            </state>
+        </path>
+        <!-- Size of participant? -->
+    </participant>
+    ...
+    <participant [...]>
+        [...]
+    </participant>
+
+    <obstacle id="id">
+        <!-- FIXME Only polygons or certain shapes? -->
+        <shape>
+            <point [...] />
+            ...
+            <point [...] />
+        </shape>
+    </obstacle>
+    ...
+    <obstacle [...]>
+        [...]
+    </obstacle>
+
+    <!-- Things for which it may currently not be possible to define them -->
+    <!-- retractable bollards -->
+    <!-- physics of participants -->
+    <!-- z coordinates? Height profiles? -->
+    <!-- rotation of road/participants/waypoints? -->
+</driveCloudEnvironment>

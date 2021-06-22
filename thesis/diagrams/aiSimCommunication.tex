@@ -1,0 +1,19 @@
+\begin{sequencediagram}
+    \newthread{sim}{:Simulation}
+    \tikzstyle{inststyle}+=[below right=-0.82cm and 5cm of sim]  % FIXME Workaround for newthread distance
+    \newthread{ai}{:\Glstext{ai}}
+    \postlevel%
+    \begin{call}{ai}{Wait for request}{sim}{Send simulation state}
+        \prelevel\prelevel%
+        \begin{callself}{sim}{Simulate}{}
+            \postlevel%
+        \end{callself}
+    \end{call}
+    \begin{call}{ai}{Request simulation data}{sim}{Send simulation data}
+    \end{call}
+    \begin{callself}{ai}{Calculate control commands}{}
+    \postlevel%
+    \end{callself}
+    \begin{call}{ai}{Control simulation or \glstext{av}}{sim}{Send alive message}
+    \end{call}
+\end{sequencediagram}

@@ -1,0 +1,42 @@
+%!TEX root = ../proposal.tex
+\section{Problem Statement}\label{sec:problem}
+%\draft{There are too many test cases to formalize}\\
+The number of possible test cases is huge.
+So a formalization of test cases can only treat a subset of the test case space.\par
+
+%\draft{Testing an \glstext{adas} is complex}\\
+When focussing on test cases explicitly targeting safety critical \glspl{adas} \eg{} \gls{acc}, lane centering, emergency brake assistant or collision avoidance system the number of possible test cases is still very large.
+Additionally an increasing variety of supported \glspl{adas} requires an increasing variety of input data in order to enable \glspl{adas} to work properly.\\
+%\draft{Data not provided by the simulator has to be shipped with the test.}\\
+%\draft{An external \glstext{ai} needs communication}\\
+A traffic participant occurring in a test case is either a car that follows a predefined path on the lanes or is an \gls{av} that is controlled by an \gls{ai}.
+Since \glspl{ai} differ greatly in their implementation they can not be directly included in the simulation and have to run separately.
+Furthermore a tester may not want to expose the implementation of an \gls{ai} to \drivebuild{}.
+Hence \glspl{ai} have to run externally.
+This yields the problem of specifying a comprehensive but efficient way for the simulator and an external \gls{ai} to communicate and exchange data.\par
+
+%\draft{Testing the efficiency of an \glstext{ai} is hard}\\
+When focussing on test cases evaluating the efficiency of an \gls{ai} the execution time of the verification of test criteria and the discrepancy between the hardware used for testing and the actual hardware used within a real \gls{av} might falsify the test results.\\
+%\draft{Network latency influences the results of external \glspl{ai}}\\
+In case of an external \gls{ai} the network latency further falsifies test results.\par
+
+%\draft{Extending the range of supported test cases complicates the validation and evaluation of criteria}\\
+When focussing on even more test cases to be formalized the diversity of criteria required for defining success and fail criteria rises as well.
+This results in the problem of an increasing complexity in the validation and evaluation of test criteria.
+Testing certain \glspl{adas} may need still more criteria than the ones provided by \drivebuild{}.
+Allowing an user to introduce additional criteria on the client side leads to the problem of distributing criteria over the underlying platform and the user plus divides the corresponding responsibilities of the verification of criteria.\par
+
+%\draft{Distributing tests requires prediction of load}\\
+When distributing test runs across a collection of computers a common goal is a high utilization of the provided resources.
+This leads to the problem of finding a strategy of distributing executions of tests based on their predicted load and therefore to determine characteristics of test cases that deposit in the load.\par
+
+The goals of this work are the creation of a scheme for formalizing test cases that are able to describe static elements (\eg{} roads and obstacles), dynamic elements (\eg{} participants and their movements), test criteria and sensor data required by \glspl{ai}, the specification a life cycle for handling the execution of tests and the actual implementation of \drivebuild{}.
+
+%\subsection{Terminology}
+%This section serves only for the purpose of using terms consistently and will be removed after the draft is finished.
+%\begin{description}
+%    \item[(test) environment] Description of roads, lanes, junctions and obstacles. Contains no participants.
+%    \item[(test) scenario] Extended environment describing initial positions and orientations of participants as well as their physical properties. \draft{Physical properties? Really?}
+%    \item[test criteria] Definition of whether a test execution was successful or not.
+%    \item[test case] Combination of scenario and criteria.
+%\end{description}

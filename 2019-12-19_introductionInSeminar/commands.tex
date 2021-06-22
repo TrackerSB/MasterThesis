@@ -1,0 +1,128 @@
+%!TEX root = ../2019-12-17_introductionInSeminar.tex
+% Animated bubble diagram
+\tikzset{%
+    Partha/.cd,
+    start angle/.initial=0,
+    orientation/.initial=1
+}
+\makeatletter
+\newlength{\bubbleInitAngle}
+\newcommand{\BubbleDiagramAnimated}[2][]{%
+    \begin{tikzpicture}[%
+        every node/.style={align=center,let hypenation},
+        Partha/.cd,#1
+    ]
+    \setlength{\bubbleInitAngle}{%
+        \ifnumequal{\pgfkeysvalueof{/tikz/Partha/orientation}}{1}{0pt}{-180pt}
+    }
+    \foreach \smitem [count=\xi] in {#2}{\global\let\maxsmitem\xi}
+    \pgfmathtruncatemacro\actualnumitem{\maxsmitem-1}
+    \foreach \smitem [count=\xi] in {#2}{%
+        \ifnumequal{\xi}{1}{ %true
+            \node[bubble center node, smvisible on=<\xi->](center bubble){\smitem};
+        }{%false
+            \pgfmathtruncatemacro{\xj}{\xi-1}
+            \pgfmathtruncatemacro{\angle}{
+                \pgfkeysvalueof{/tikz/Partha/start angle}
+                + (\pgfkeysvalueof{/tikz/Partha/orientation} * 360 / \actualnumitem * \xj)
+                + \bubbleInitAngle
+            }
+            \edef\col{\@nameuse{color@\xj}}
+            \node[bubble node, smvisible on=<\xi->](module\xi) at (center bubble.\angle) {\smitem};
+        }%
+    }%
+    \end{tikzpicture}
+}
+\makeatother
+
+% Fullscreen frames
+\newcommand{\plainFrame}[1]{%
+    {
+        \setbeamertemplate{headline}{\vskip-\headheight}
+        \setbeamertemplate{footline}{\defaultfootline}
+        \begin{frame}
+            \vspace{-\headheight} % FIXME headline seems not to work as expected
+            #1
+        \end{frame}
+    }
+}
+\newcommand{\imageFrame}[2][0pt]{%
+    {
+        \setbeamertemplate{headline}{}
+        \setbeamertemplate{footline}{\defaultfootline}
+        \begin{frame}
+            \begin{textblock*}{\pagewidth} (0pt, #1)
+                \centering
+                \includegraphics[width=\pagewidth,height=\pageheight,keepaspectratio]{#2}
+            \end{textblock*}
+        \end{frame}
+    }
+}
+\newcommand{\imageFrameSvg}[1]{%
+    {
+        \setbeamertemplate{headline}{}
+        \setbeamertemplate{footline}{\defaultfootline}
+        \begin{frame}
+            \begin{textblock*}{\pagewidth} (0pt, 0pt)
+                \centering
+                \includesvg[width=\textwidth,height=\textheight]{#1}
+            \end{textblock*}
+        \end{frame}
+    }
+}
+\newcommand{\videoFrame}[2]{%
+    {
+        \setbeamertemplate{headline}{\vskip-\headheight}
+        \setbeamertemplate{footline}{\defaultfootline}
+        \begin{frame}
+            \centering
+            \Huge{\href{run:#1}{#2}}
+        \end{frame}
+    }
+}
+\newcommand{\draftFrame}[1]{%
+    \begin{frame}[plain]
+        \centering
+        {\Huge \draft{#1}}
+    \end{frame}
+}
+
+% Subsection color box
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\newcommand<>{\subsectionBox}[1]{%
+    \uncover#2{%
+        \begin{tikzpicture}[remember picture,overlay]%
+            \draw[fill=#1, draw=none]
+                (current page.north west) rectangle ++(20pt, -\pageheight);
+            \node[anchor=south west] at (current page.south west)
+                {\large \rotatebox{90}{\currentname}};
+        \end{tikzpicture}
+    }
+}
+
+% Short codes
+\newcommand{\orcid}[1]{\href{https://orcid.org/#1}{\textcolor[HTML]{A6CE39}{\aiOrcid}}}
+\newcommand{\drivebuild}{{\scshape DriveBuild}}
+\newcommand{\Eg}{E.\,g.\xspace}
+\newcommand{\draft}[1]{\color{red} \textit{#1}}
+\newcommand{\draftItemize}[1]{%
+    \begin{itemize}
+        \color{red}
+        \itshape{}
+        #1
+    \end{itemize}
+}
+\newcommand{\sectionFrame}{%
+    \begin{frame}
+        \vfill
+        \centering
+        \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+            \usebeamerfont{title}\insertsectionhead\par%
+        \end{beamercolorbox}
+        \vfill
+    \end{frame}
+}
+

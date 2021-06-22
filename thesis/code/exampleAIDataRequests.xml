@@ -1,0 +1,10 @@
+<boundingBox id="<someRequestID>" />
+<camera id="<someRequestID>" width="800" height="600" fov="60" direction="FRONT" />
+<carToLaneAngle id="<someRequestID>" /> <!-- FIXME Check whether this is actually implemented -->
+<damage id="<someRequestID>" />
+<laneCenterDistance id="<someRequestID>" />
+<lidar id="<someRequestID>" radius="100" />
+<light id="<someRequestID>" /> <!-- FIXME Check whether this is actually implemented -->
+<position id="<someRequestID>" />
+<speed id="<someRequestID>" />
+<steeringAngle id="<someRequestID>" />

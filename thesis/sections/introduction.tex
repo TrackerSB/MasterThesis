@@ -1,0 +1,22 @@
+%!TEX root = ../thesis.tex
+\section{Introduction and Motivation}
+\glsresetall%
+The progress in developing \glspl{av} over the past years is impressive and the effort taken for testing them is amazing.
+The Cruise program of \gls{gm} drove over \SI{1}{\million\mile}~\cite{cruiseMillions}, Uber drove over \SI{3}{\million\mile}~\cite{uberMillions} and cars of Googles Waymo project even drove over \SI{10}{\million\mile} autonomously on public roads.
+Additionally Waymo drove over \SI{7}{\billion\mile} in simulations~\cite{waymoMillions}.
+However, many more miles have to be driven autonomously since the process of testing and training \glspl{av} requires \glspl{av} to drive hundreds of millions of miles autonomously~\cite{millions} to assure a high reliability on their safety.
+This results in an increasing importance of simulations~(\cite{simulationsImporantForbes,simulationsImporantBusinessInsider}).
+To simulate \glspl{av} instead of driving real \glspl{av} on public roads allows to drive many more miles within a certain time interval, avoids accidents and injuries, vastly reduces the costs of testing, allows to test \glspl{av} in predefined situations and enables testers to reproduce test results and faulty behaviors, \ie{} to debug \glspl{av}.
+The setup of simulations and the interaction with \glspl{av} in a simulation are complex which makes simulation based testing tedious and error prone.
+There is currently no well known scheme of abstractly specifying test criteria in the context of \glspl{av} and no well known software architecture which is geared towards simulation based testing of \glspl{av}.
+Furthermore there is at the moment no tool that provides an abstract interface for testing and training \glspl{av} as well as for supporting test generation.\\
+I present \drivebuild{}, a research toolkit that automates the process of setting up simulations, executing tests on a cluster, verifying test criteria during simulation time, determining test results and collecting training data.
+This automation avoids dealing manually with tedious and error prone tasks.
+\drivebuild{} implements a unified process to test \glspl{av} and to collect training for them which reduces the required effort for testing \glspl{av} and gathering training data.
+\drivebuild{} provides a declarative and extensible \gls{xml} based \gls{dsl} to formalize test cases which allows to verify test cases and reuse test definitions.
+This work does a critical discussion of the domain and presents a user study to reveal the main requirements of the \gls{dsl}.
+The work contains an extensive evaluation that shows the generality and the scalability of \drivebuild{}.
+This evaluation develops a scheme to test \glspl{av} against test generators.\par
+
+The thesis is organized as follows: \Cref{sec:problemStatement} introduces detailed descriptions about the problems this work aims to solve followed by \cref{sec:background} which explains the basic concepts this work utilizes or orients on and \cref{sec:stateOfTheArt} which discusses current and related approaches.
+\Cref{sec:methodology} raises the applied methods and strategies, \cref{sec:implementation} describes the implementation in detail and \cref{sec:evaluation} shows the capabilities of the test formalization provides, the metrics it offers, analyzes the scalability and discusses how supportive \drivebuild{} is for testers.

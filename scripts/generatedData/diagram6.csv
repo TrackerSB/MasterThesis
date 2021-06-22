@@ -1,0 +1,12 @@
+author,result,number
+Harish Swaminathan Gopal,SUCCEEDED,208
+Reference Generator,FAILED,128
+Reference Generator,SUCCEEDED,32
+Sebastian Asen,SUCCEEDED,73
+Harish Swaminathan Gopal,FAILED,174
+Sebastian Vogl,FAILED,102
+Sebastian Asen,FAILED,160
+Sebastian Vogl,SUCCEEDED,36
+Reference Generator,TIMEOUT,8
+Sebastian Asen,TIMEOUT,2
+Sebastian Vogl,TIMEOUT,47

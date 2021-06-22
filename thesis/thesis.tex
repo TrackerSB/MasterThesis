@@ -1,0 +1,143 @@
+\documentclass[10pt,a4paper,final]{article}
+\usepackage[english]{babel}
+\usepackage{fontspec}
+\usepackage[utf8]{luainputenc}
+
+% Must be included before tikz when using dvipsnames option (See https://en.wikibooks.org/wiki/LaTeX/Colors#The_68_standard_colors_known_to_dvips)
+\usepackage[dvipsnames]{xcolor}
+
+% Packages without ordering restrictions
+\usepackage{academicons}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[%
+        backend=biber,
+        safeinputenc,
+        sorting=none,
+        style=numeric
+    ]{biblatex}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{datetime}
+\usepackage[a4paper]{geometry}
+\usepackage[%
+        acronym,
+        automake=immediate,
+        nonumberlist,
+        toc=false
+    ]{glossaries}
+\usepackage{glossary-mcols}
+\usepackage{graphicx}
+\usepackage[%
+        pdfauthor={Stefan Huber},
+        pdfkeywords={test automation, autonomous vehicles, BeamNG}
+    ]{hyperref}
+\usepackage{longtable}
+% \usepackage{ltablex} % NOTE This package causes problems
+\usepackage{ltxtable}
+% \usepackage{lua-visual-debug}
+\usepackage{makecell}
+\usepackage{microtype}
+\usepackage{minted}
+\usepackage{pdfpages}
+\usepackage{pgf-umlsd}
+\usepackage{pifont}
+\usepackage{placeins}
+% \usepackage{refcheck}
+\usepackage{siunitx}
+\usepackage{smartdiagram}
+\usepackage{standalone}
+\usepackage{subcaption}
+\usepackage{svg}
+\usepackage{tikz}
+\usepackage{tikz-er2}
+\usepackage{url}
+\usepackage{xspace}
+
+% Should be loaded after fvextra (Seems to be a dependency of minted)
+\usepackage{csquotes}
+
+% According to https://www.namsu.de/Extra/pakete/Cleveref.html it has to be the last
+\usepackage[capitalize,noabbrev,nameinlink]{cleveref}
+
+% Apply fixes and workarounds
+\input{workarounds}
+% \directlua{dofile("latexPlugins/ColorizeUnderfullVBox.lua")} % chktex 36 chktex 18
+% \overfullrule=5mm
+% \directlua{dofile("latexPlugins/ColorizeOverfullrule.lua")} % chktex 36 chktex 18
+
+% Add configurations
+\input{configs}
+
+% Apply predefined layout of the chair
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3ex plus 2ex minus 2ex}
+
+% Add custom commands
+\input{commands}
+
+% Setup biblatex
+\addbibresource{biblio.bib}
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+% FIXME Adding nocite breaks the citation order in BibLaTeX
+% \nocite{*} % FIXME Do not display not cited referenced
+
+% Generate the glossary
+\makeglossaries%
+\renewcommand*{\glspostdescription}{} % Remove dots at the end of each entry
+\loadglsentries{acronyms.tex}
+
+\begin{document}
+    % Title page
+    \input{title.tex}
+
+    % Abstract page
+    \pagestyle{empty}
+    \include{sections/abstract}
+    \pagebreak
+
+    \tableofcontents
+    \pagebreak
+
+    \pagestyle{plain}
+
+    \input{sections/introduction}
+    \input{sections/problemStatement}
+    \input{sections/background}
+    \input{sections/stateOfTheArt}
+    \input{sections/method}
+    \input{sections/implementation}
+    \input{sections/evaluation}
+    \input{sections/conclusions}
+    \input{sections/futurework}
+    \pagebreak
+
+    \section{Acronyms}
+    \begingroup
+    \renewcommand{\section}[2]{}
+    \printglossary[type=\acronymtype, style=mcolindex]
+    % \glsaddallunused[\acronymtype] % FIXME Do not show unused acronyms
+    \endgroup
+    \pagebreak
+
+    \section{References}
+    \begingroup
+    \renewcommand{\section}[2]{}
+    \printbibliography[category=cited]
+    \endgroup
+
+    % \section{Not cited} % FIXME Do not show not cited references
+    % \begingroup
+    % \renewcommand{\section}[2]{}
+    % \printbibliography[notcategory=cited]
+    % \endgroup
+
+    \pagebreak
+    \appendix
+    \input{sections/appendix.tex}
+
+    \FloatBarrier%
+    \includepdf[pages=-]{sections/declaration.pdf}
+\end{document}

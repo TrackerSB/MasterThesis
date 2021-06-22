@@ -1,0 +1,27 @@
+\begin{tikzpicture}[%
+        ->,
+        >=stealth
+    ]
+    \node (evaluation) {\itshape criterion};
+    \node[above=of evaluation] (start) {};
+    \node[below=of evaluation] (criterion) {\itshape evaluation};
+    \node[left=of criterion] (connective) {\itshape connective};
+    \node[below=of connective] (and) {and};
+    \node[right=of and] (or) {or};
+    \node[left=of and] (not) {not};
+    \node[below=of criterion] (sc) {\glstext{sc}};
+    \node[right=of sc] (vc) {\glstext{vc}};
+
+    \path
+        (start) edge (evaluation)
+        (evaluation) edge (criterion)
+        (evaluation) edge[bend left]  (connective)
+        (connective) edge[bend left] (evaluation)
+        (criterion) edge (sc)
+        (criterion) edge (vc)
+        (vc) edge[bend right] (evaluation)
+        (connective) edge (not)
+        (connective) edge (and)
+        (connective) edge (or);
+\end{tikzpicture}
+

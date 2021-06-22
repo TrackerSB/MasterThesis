@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<environment xmlns="http://drivebuild.com"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://drivebuild.com ../drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <timeOfDay>0</timeOfDay> <!-- The time of the day to set (0...1) -->
+
+    <lanes>
+        <lane markings="true"> <!-- Definition of a single lane -->
+            <laneSegment x="0" y="0" width="8"/> <!-- First point of the lane -->
+            <laneSegment x="50" y="0" width="8"/> <!-- Second point of the lane -->
+            <laneSegment x="80" y="20" width="8"/>
+            <laneSegment x="100" y="20" width="8"/>
+        </lane>
+        <lane> <!-- NOTE Every lane requires at least two points -->
+            <laneSegment x="50" y="-30" width="4"/>
+            <laneSegment x="30" y="20" width="4"/>
+        </lane>
+    </lanes>
+
+</environment>

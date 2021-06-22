@@ -1,0 +1,28 @@
+\documentclass{standalone}
+
+\usepackage[acronym,automake,toc]{glossaries}
+\usepackage{pgf-umlsd}
+
+\makeglossaries%
+\loadglsentries{../acronyms.tex}
+
+\begin{document}
+
+\begin{sequencediagram}
+    \newthread{sim}{:Simulation}
+    \newinst{dummy}{Dummy placeholder}
+    \newthread{ai}{:\glstext{ai}}
+    \begin{call}{ai}{Wait for request}{sim}{Send alive message}
+        \begin{callself}{sim}{Simulate}{}
+        \end{callself}
+    \end{call}
+    \begin{call}{ai}{Request simulation data}{sim}{Send simulation data}
+    \end{call}
+    \begin{callself}{ai}{Calculate control commands}{}
+    \end{callself}
+    \begin{call}{ai}{Control simulation}{sim}{Send alive message}
+    \end{call}
+\end{sequencediagram}
+
+
+\end{document}

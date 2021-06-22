@@ -1,0 +1,13 @@
+Title:
+DriveBuild: Automation of Simulation-based Testing of Autonomous Vehicles
+
+Abstract:
+The most common technique for testing autonomous vehicles (AVs) is simulation based testing.
+For each test testers need to describe a scenario, specify test criteria, setup a simulator, execute the test, connect artificial intelligences (AIs) to it and collect its results or generated training data.
+This process is tedious and error prone.
+I present DriveBuild, a research toolkit for simulation based testing of AVs.
+DriveBuild comes with an abstract scheme for describing tests and provides a scalable client-server-architecture which offers a micro service based interface.
+It also offers many metrics to provide to generators and AIs and to analyze them.
+DriveBuild automates the process of setting up simulators, distributing test runs across a cluster, frequently checking test criteria during a simulation and summarizing test results.
+Further it reduces the amount of time needed to invest into preparing, running and evaluating simulation based tests.
+

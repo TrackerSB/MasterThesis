@@ -1,0 +1,16 @@
+%!TEX root = ../thesis.tex
+\begin{tabularx}{\linewidth}{l X c c}
+    \toprule
+    \bfseries Type & \bfseries Description & \bfseries \glstext{vc} & \bfseries \glstext{sc} \\
+    \midrule
+    position & Checks whether an \gls{av} is at a certain position or within a certain radius of it & \checkmark{} & \checkmark{} \\
+    area & Checks whether an \gls{av} is within a certain area & \checkmark{} & \checkmark{} \\
+    lane & Checks whether an \gls{av} drives on a certain lane or off-road & \checkmark{} & \checkmark{} \\
+    speed & Checks whether the speed of an \gls{av} is below a given velocity & \checkmark{} & \checkmark{} \\
+    damage & Checks whether an \glspl{av} is damaged & \checkmark{} & \checkmark{} \\
+    time & Checks whether the simulation is currently within a certain interval of ticks & \checkmark{} & \ding{53} \\
+    distance & Checks whether the distance between two \glspl{av} or between an \gls{av} and the center of the lane driving on is smaller than a given distance & \checkmark{} & \checkmark{} \\
+    \glstext{ttc} & Checks whether the \glsfirst{ttc} of an \gls{av} and another participant or obstacle is smaller than a given value & \checkmark{} & \ding{53} \\
+    \bottomrule
+\end{tabularx}
+

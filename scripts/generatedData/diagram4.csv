@@ -1,0 +1,25 @@
+generatorauthor,aiauthor,result,status,number,invalid,failed
+Sebastian Asen,Reference AI,SUCCEEDED,FINISHED,43,False,False
+Reference Generator,Vsevolod Tymofyeyev,FAILED,FINISHED,57,False,False
+Harish Swaminathan Gopal,Marco Landau,FAILED,FINISHED,49,False,False
+Sebastian Asen,Vsevolod Tymofyeyev,FAILED,FINISHED,54,False,False
+Sebastian Vogl,Reference AI,FAILED,FINISHED,32,False,False
+Sebastian Asen,Vsevolod Tymofyeyev,FAILED,RUNNING,1,False,False
+Sebastian Vogl,,,,45,False,True
+Sebastian Vogl,Marco Landau,FAILED,FINISHED,21,False,False
+Sebastian Vogl,Reference AI,SUCCEEDED,FINISHED,48,False,False
+Harish Swaminathan Gopal,Vsevolod Tymofyeyev,SUCCEEDED,FINISHED,52,False,False
+Sebastian Vogl,Vsevolod Tymofyeyev,FAILED,FINISHED,66,False,False
+Reference Generator,Reference AI,SUCCEEDED,FINISHED,22,False,False
+Sebastian Asen,Reference AI,UNKNOWN,TIMEOUT,2,False,False
+Sebastian Vogl,Marco Landau,UNKNOWN,TIMEOUT,34,False,False
+Reference Generator,Reference AI,UNKNOWN,TIMEOUT,4,False,False
+Reference Generator,Marco Landau,FAILED,FINISHED,28,False,False
+Harish Swaminathan Gopal,Vsevolod Tymofyeyev,FAILED,FINISHED,44,False,False
+Sebastian Asen,Marco Landau,FAILED,FINISHED,48,False,False
+Sebastian Vogl,Vsevolod Tymofyeyev,UNKNOWN,TIMEOUT,12,False,False
+Sebastian Vogl,Reference AI,UNKNOWN,TIMEOUT,16,False,False
+Harish Swaminathan Gopal,Reference AI,FAILED,FINISHED,23,False,False
+Harish Swaminathan Gopal,Marco Landau,SUCCEEDED,FINISHED,21,False,False
+Sebastian Vogl,Reference AI,SKIPPED,CANCELED,2,False,False
+Harish Swaminathan Gopal,Reference AI,SUCCEEDED,FINISHED,56,False,False

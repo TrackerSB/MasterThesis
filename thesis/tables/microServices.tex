@@ -1,0 +1,21 @@
+%!TEX root = ../thesis.tex
+\def\tabularxcolumn#1{m{#1}}
+\begin{tabularx}{.9\textwidth}{X l l}
+    \toprule
+    \bfseries \Glstext{url} & \bfseries Parameters (name: type) & \bfseries Return Type \\
+    \midrule
+    /runTests & \makecell[l]{user: User\\\underline{zip byte data}} & SubmissionResult \\
+    \midrule
+    /ai/waitForSimulatorRequest & \makecell[l]{sid: SimulationID\\vid: VehicleID} & SimStateResponse \\
+    \midrule
+    /ai/requestData & \makecell[l]{sid: SimulationID\\vid: VehicleID\\request: DataRequest} & DataResponse\\
+    \midrule
+    /ai/control & \makecell[l]{sid: SimulationID\\vid: VehicleID\\\underline{Control}} & Void \\
+    \midrule
+    /stats/getRunningSids & user: User & SubmissionResult \\
+    \midrule
+    /stats/<action> & \makecell[l]{\textit{At least:}\\sid: SimulationID\\\textit{Maybe further parameters}} & \textit{Depends on action} \\
+    \midrule
+    /sim/stop & \makecell[l]{sim: SimulationID\\result: TestResult} & Void\\
+    \bottomrule
+\end{tabularx}

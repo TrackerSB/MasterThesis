@@ -1,0 +1,46 @@
+\begin{tikzpicture}[%
+        ->,
+        >=stealth
+    ]
+    \node (client) {\includegraphics[width=.125\linewidth]{pictures/computer_client.png}};
+    \node[above=.7 of client] (ai1) {\includegraphics[width=.125\linewidth]{pictures/ai.png}};
+    \node[below=.7 of client] (ai2) {\includegraphics[width=.125\linewidth]{pictures/ai.png}};
+    \node[right=1.5 of client] (microService) {\includegraphics[width=.125\linewidth]{pictures/virtualMachine_microService.png}};
+    \node[right=1.5 of microService] (windows2) {\includegraphics[width=.0625\linewidth]{pictures/virtualMachine_windows.png}};
+    \node[above=0.5 of windows2] (windows1) {\includegraphics[width=.0625\linewidth]{pictures/virtualMachine_windows.png}};
+    \node[below=0.25 of windows2] (dots) {\vdots};
+    \node[below=0.25 of dots] (windows3) {\includegraphics[width=.0625\linewidth]{pictures/virtualMachine_windows.png}};
+    \node[right=1.5 of windows2] (dbms) {\includegraphics[width=.0625\linewidth]{pictures/dbms.png}};
+
+    \draw
+        (client) edge (microService)
+        (microService) edge (client)
+        (ai1) edge (microService)
+        (microService) edge (ai1)
+        (ai2) edge (microService)
+        (microService) edge (ai2)
+        (microService) edge (windows1)
+        (windows1) edge (microService)
+        (microService) edge (windows2)
+        (windows2) edge (microService)
+        (microService) edge (windows3)
+        (windows3) edge (microService)
+        (dbms) edge (windows1)
+        (windows1) edge (dbms)
+        (dbms) edge (windows2)
+        (windows2) edge (dbms)
+        (dbms) edge (windows3)
+        (windows3) edge (dbms)
+        (microService) edge[bend left=70] (dbms) % FIXME These two edges needed?
+        (dbms) edge[bend right=70] (microService);
+
+    % Labels
+    \node[below=.2 of ai2] (clientLabel) {\colorbox{clusterClient}{Client}};
+    \node[right=1.8 of clientLabel] (mainAppLabel) {\colorbox{clusterMicroService}{\Glstext{mainapp}}};
+    \node[right=1.2 of mainAppLabel] (simNodeLabel) {\colorbox{clusterSimNode}{\Glstext{simnode}}};
+    \node[right=.9 of simNodeLabel] (dbmsLabel) {\colorbox{clusterDbms}{\Glstext{dbms}}};
+
+    % Cluster box
+    \node[draw,fit={(microService)(dbms)(windows1)(windows3)},inner sep=3mm,line width=0.5mm] (clusterBox) {};
+    \node[above=.1 of clusterBox.north east, anchor=south east] {Cluster};
+\end{tikzpicture}

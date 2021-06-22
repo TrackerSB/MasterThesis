@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<environment xmlns="http://drivebuild.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://drivebuild.com ../drivebuild.xsd">
+    <author>Harish</author>
+    <timeOfDay>0</timeOfDay>
+    <lanes>
+        <lane>
+            <laneSegment x="0" y = "0" width ="4"/>
+            <!--intial starting point of the lane-->
+            <laneSegment x ="5" y = "5" width ="4"/>
+            <laneSegment x="10" y = "5" width ="4"/>
+            <laneSegment x="10" y = "10" width ="4"/>
+            <laneSegment x="12" y = "10" width ="4"/>
+            <laneSegment x="15" y = "15" width ="4"/>
+            <laneSegment x="20" y = "15" width ="4"/>
+            <laneSegment x="25" y = "15" width ="4"/>
+            <laneSegment x="30" y = "15" width ="4"/>
+            <laneSegment x="33" y = "15" width ="4"/>
+            <laneSegment x="35" y = "20" width ="4"/>
+            <laneSegment x="38" y = "20" width ="4"/>
+            <laneSegment x="41" y = "20" width ="4"/>
+            <laneSegment x="46" y = "20" width ="4"/>
+            <laneSegment x="50" y = "20" width ="5"/>
+            <laneSegment x="60" y = "20" width ="4"/>
+            <laneSegment x="65" y = "25" width ="4"/>
+            <laneSegment x="70" y = "25" width ="5"/>
+            <laneSegment x="75" y = "25" width ="5"/>
+            <laneSegment x="95" y = "25" width ="4"/>
+            <laneSegment x="105" y = "30" width ="5"/>
+            <!-- steep turning point-->
+            <laneSegment x="90" y = "40" width ="4"/>
+            <laneSegment x="70" y = "45" width ="4"/>
+            <laneSegment x="54" y = "45" width ="4"/>
+            <laneSegment x="50" y = "45" width ="4"/>
+            <laneSegment x="46" y = "50" width ="4"/>
+            <laneSegment x="30" y = "50" width ="4"/>
+            <laneSegment x="20" y = "50" width ="4"/>
+            <laneSegment x="10" y = "50" width ="4"/>
+            <laneSegment x="5" y = "50" width ="4"/>
+            <laneSegment x="4" y = "80" width ="4"/>
+            <!--the end of the road segment -->
+        </lane>
+    </lanes>
+    <obstacles>
+        <!-- four different types are been placed at selected points-->
+        <cube x= "3" y = "50" width = "1" length = "5" height = "4" />
+        <!-- A cube has been created at the end of the road to check the control of the vechile -->
+        <cylinder x ="63" y="23" radius = "3" height = "6" />
+        <cylinder x = "33" y = "11" radius ="2" height ="4"/>
+        <cylinder x ="6" y = "70" radius ="2" height ="4"/>
+        <cone x ="30" y ="15" baseRadius = "0.5"  height ="2"/>
+        <cone x ="73" y ="25" baseRadius = "0.5"  height ="2"/>
+        <cone x ="105" y ="25" baseRadius = "0.5"  height ="2"/>
+        <cone x="50" y = "20" baseRadius ="0.5" height = "2"/>
+        <bump x="35" y = "50" width = "1" length = "4" height = "0.1" upperLength = "3.5" upperWidth = "0.5"/>
+        <bump x="45" y = "20" width = "1" length = "4" height = "0.1" upperLength = "3.5" upperWidth = "0.5"/>
+        <!-- speed breaker -->
+    </obstacles>
+</environment>
+

@@ -1,0 +1,41 @@
+ - If chapter too long --> Appendix (like library/version table)
+ - Link implementation to method section
+ - Not more implementation details
+ - Able to replicate the work based on implementation section
+ - Implementation section is enough
+ - Maybe mention shortly LUA triggers (one sentence)
+ - High level description in prefab, json and lua
+ - Logically obstacles is a static object --> Use APIs by BeamNG (No need to explain HOW objects are included)
+ - Semantic model move to method section (maybe separate subsection)
+ - B-Spline --> Design decision (Mention its not invented; pretty common)
+ - If change language, does decision change? If so, then implementation, else method section.
+ - Table caption above; figure caption below
+ - Maybe instead of implementation use high level and low level description
+ - Do not explain how protobuf accesses/changes properties (If really important show example)
+ - Mention usage of client
+ - Example for DataRequest and DataResponse (brief)
+ - Messages everywhere masked except for client at DataRequest and DataResponse
+
+Evaluation:
+ - Reformulate description to others (Example of good practise "start(sid, vid)")
+ - Experience is part of the evaluation
+ - Talk to people, failures, implementation, test generation/construct AI
+ - Make students submit tasks and implement client scheme
+ - Address their needs (wheather, CarToLaneAngle, Restart,...)
+ - Plan it in a way that it does not explode
+ - Imagine: Which contributions, why contributions, research questions
+ - Technical evaluation: Requirement coverage, efficiency, scalability, accuracy of system (e.g. two more than one experience my own generator but also other generators.
+    Do they cover other features?
+    Is this the case.
+ - Coverage table: Features offered: Find features used
+ - Evaluate two AIs
+ - How supportive is DriveBuild?
+ - Some sort of performance measurements like how long run tests, is the system scalable
+ - => Show properties of systems (System crashed, tests failed because of system)
+ - => Less important than other experience
+ - Not sure whether worth of formal user study
+ - Maybe informal interview (Useful/Not useful)
+
+Registration:
+ - Secretary office
+ - Let it be signed by professor

@@ -1,0 +1,28 @@
+\plainFrame{%
+    \centering
+    \resizebox{!}{\pageheight}{%
+        \begin{sequencediagram}
+            \newthread{client}{:Client}
+            \tikzstyle{inststyle}+=[below right=-0.82cm and 5cm of client]
+            \newthread{drivebuild}{:MainApp}
+            \begin{call}{client}{/runTests}{drivebuild}{SubmissionResult}
+            \end{call}
+            \begin{sdblock}{Handle AI}{For each AI in parallel}
+                \begin{call}{client}{/ai/waitForSimulatorRequest}{drivebuild}{SimStateResponse}
+                    \begin{callself}{drivebuild}{Wait for requestAiFor}{}
+                    \end{callself}
+                \end{call}
+                \begin{call}{client}{/ai/requestData}{drivebuild}{DataResponse}
+                \end{call}
+                \begin{callself}{client}{Calculate control commands}{}
+                \end{callself}
+                \begin{call}{client}{/ai/control}{drivebuild}{Void}
+                    \begin{callself}{drivebuild}{Apply control commands}{}
+                    \end{callself}
+                \end{call}
+            \end{sdblock}
+        \end{sequencediagram}
+    }
+    \subsectionBox{colorVerify!40}
+}
+

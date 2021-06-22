@@ -1,0 +1,56 @@
+Make clear:
+Test does not interrupt does not mean it succeeded
+So divide success and failure
+modular approach to test definition
+specify environment separately from test suite => reuse of environments
+extensible system (multiple environment formats supported)
+Mention must requirement dce (maybe also commonroad and opendrive)
+Challenge uniform information (opendrive --> commonroad --> dce)
+Test definition in terms of dce
+
+Validation restricting condition
+Motivate why you need to restrict/bound when the conditions have to hold (Is it called "context"?)
+Certain lanes certain speed limits
+
+
+Current challenges:
+Who checks validity of encoded formulae
+Some formulae may be not computable within the cloud (Provide additional data?)
+Which information has to be provided to ais?
+Who is responsible for doing what?
+
+Interface/API for accessing data
+Compute conditions in cloud AND outside at client side (Also the client may send a fail or success)
+
+Split interfaces
+test subject (reading interface and a control interface)
+
+Provide control of stopping simulation
+
+FPS => ticks (Fidelity; you can not go faster)
+number of ticks define test length
+Use logical time (ticks) instead of seconds
+
+Control, monitor and simulation frequencies (ticks)
+
+Next:
+Put down things in text and diagram and motivate it
+Sketch architecture
+"Nice to have feature because of"
+Diagram: Cloud, test definition, tester, capture requirements of actors, ais, system under test, communication
+design decision: bidirectional synchronous communication, synchronous simulation, asynchronious communication
+Start from the approach of testing (definition driving task, defining environment, conditions,... "What do I need?" Which task is requiring what? How is this implemented by the system? How is it encoded within the descriptions?)
+Work on proposal
+
+Next one or two weeks!
+What would others (e.g. in the seminar) like to have? "Userstudy" Mention in methodology
+Ask: What to have feature because of what?
+
+If spare time available:
+What kind of experience like to run?
+Whats the goal of the experience?
+Make same claim about the system
+Proof why it is right
+
+Collect data within competition of seminar (of next semester)
+Investigate usage of platform (=> Real data with real people)

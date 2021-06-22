@@ -1,0 +1,22 @@
+%!TEX root = ../thesis.tex
+\begin{abstract}
+Simulation based testing is the most common technique for testing \glspl{av}.
+For each test a tester needs to describe a scenario, specify test criteria, setup a simulation, connect the \glspl{ai} under test to it, execute the test, determine its results and collect all generated data \eg{} for further analysis or training \glspl{ai}.
+This process is tedious and error prone.
+There is no well-established procedure how to cope with or solve these problems.
+I present \drivebuild{}, a research toolkit for simulation based testing of \glspl{av}.
+\drivebuild{} comes with an abstract scheme to describe tests and provides a scalable client-server-architecture based on micro services.
+\drivebuild{} is able to execute automatically generated tests and to connect \glspl{ai} under test which control \glspl{av} in a simulation.
+It also offers many metrics to analyze \glspl{av} and test generators.
+This thesis shows that \drivebuild{} automates the process of setting up simulators, distributing test runs across a cluster, frequently checking test criteria during a simulation, gathering data and analyzing test results.
+So it reduces the amount of time which a tester needs to invest into preparing, running and evaluating simulation based tests.
+There are already students, courses as well as research groups that are interested in \drivebuild{} and use it for their own purpose.
+% \draftItemize{%
+%     \item Context --- Background
+%     \item Problem (Motivation)
+%     \item Approach
+%     \item Results
+%     \item Conclusions
+%     \item (Students are using it)
+% }
+\end{abstract}

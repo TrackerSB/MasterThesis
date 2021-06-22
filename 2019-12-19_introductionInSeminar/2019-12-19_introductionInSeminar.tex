@@ -1,0 +1,119 @@
+\documentclass[aspectratio=169]{beamer}
+
+% Should be first
+\usepackage[english]{babel}
+\usepackage{fontspec}
+\usepackage[utf8]{luainputenc}
+
+% Must be included before tikz when using dvipsnames option (See https://en.wikibooks.org/wiki/LaTeX/Colors#The_68_standard_colors_known_to_dvips)
+\usepackage{xcolor}
+
+% No special constraints on order
+\usepackage{academicons}
+\usepackage[%
+        backend=biber,
+        safeinputenc,
+        sorting=none,
+        style=numeric
+    ]{biblatex}
+\usepackage{calc}
+\usepackage{csquotes}
+\usepackage{fontawesome}
+\usepackage{pgf-umlsd}
+\usepackage{minted}
+\usepackage{multicol}
+\usepackage{nameref}
+\usepackage{smartdiagram}
+\usepackage{svg}
+\usepackage{tikz}
+\usepackage[absolute, overlay]{textpos}
+\usepackage{xspace}
+
+\usetikzlibrary{calc, positioning}
+
+% Configure minted
+\setminted{
+    autogobble,
+    breaklines=true,
+    fontsize=\scriptsize
+}
+
+\input{commands.tex}
+
+\title{DriveBuild}
+\subtitle{Automation of Simulation-based Testing\\of Autonomous Vehicles}
+\author{\orcid{0000-0002-6780-6055}Stefan Huber} % chktex 8
+\institute{University of Passau}
+\titlegraphic{\includegraphics[height=.10\textheight]{media/logoUniPassau.jpg}}
+\date{December 19, 2019}
+
+\usetheme{Rochester}
+\beamertemplatenavigationsymbolsempty%
+\newcommand{\defaultfootline}{%
+    \raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[10pt]{\scriptsize\insertframenumber}}}
+}
+\setbeamertemplate{footline}{\defaultfootline}
+
+\addbibresource{biblio.bib}
+\nocite{*}
+\renewcommand*{\bibfont}{\scriptsize}
+
+\begin{document}
+{
+    \setbeamertemplate{footline}{}
+    \maketitle%
+}
+
+\section{Underlying Idea}
+% Goals of testers
+\input{slides/goalsOfTesters.tex}
+
+% Problems testers share
+\input{slides/problemsTestersFace.tex}
+
+\section{Approach of \drivebuild{}}
+% Which aspects does DriveBuild handle?
+\definecolor{colorFormalize}{HTML}{008148}
+\definecolor{colorExecute}{HTML}{C6C013}
+\definecolor{colorVerify}{HTML}{EF8A17}
+\definecolor{colorGatherData}{HTML}{EF2917}
+\input{slides/handledAspects.tex}
+
+\subsection{Execution}
+% How are tests distributed?
+\input{slides/dataFlowDistribution.tex}
+
+\subsection{Runtime Verification}
+% Client side code
+\input{slides/clientAI.tex}
+\input{slides/client.tex}
+
+\input{slides/exampleReference.tex}
+
+\section{Installation}
+\sectionFrame{}
+
+% \section{Sources}
+% \sectionFrame{}
+% \begin{frame}[allowframebreaks]{Sources}
+%     \printbibliography%
+% \end{frame}
+
+\section{Backup Slides}
+\sectionFrame{}
+
+\subsection{Formalization}
+% What can be formalized?
+\input{slides/componentsOfFormalization.tex}
+
+\subsection{Runtime Verification}
+% How does the client scheme look like?
+\input{slides/clientScheme.tex}
+
+% What steps does the runtime verification?
+\input{slides/runtimeVerificationSteps.tex}
+
+\subsection{Data Collection}
+% Which data is available?
+\input{slides/availableData.tex}
+\end{document}

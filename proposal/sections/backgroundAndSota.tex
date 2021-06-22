@@ -1,0 +1,84 @@
+%!TEX root = ../proposal.tex
+\section{State of the Art and Technical Background}\label{sec:sota}
+\subsection{State of the Art}
+Concerning the definition of test environments \opendrive{}~\cite{openDrive} is one of most popular formats for defining very comprehensive environments and is used by many well known car manufacturers (\eg{} Audi, \gls{bmw} and Daimler) and other organizations like Fraunhofer, \gls{tum} and \gls{dlr} Institute of Robotics and Mechatronics.
+The format offers declarations of signs, cross falls, parking spaces, bridges and signals which may even dynamically change.
+Especially the definition of streets and rail roads can be very complex and enhanced with meta information.
+\Eg{} it is possible to define predecessor and successor lanes, neighbor lanes, complex junctions, acceleration strips, side walks, multiple different types of markings, reference lines for roads/junctions and rail road switches.
+Although \opendrive{} has many options to define environments it has neither the capability of adding any traffic participant nor of specifying their movements nor of expressing any criterion related to the actual test.\\
+\openscenario{}~\cite{openScenario} is a scheme for adding traffic participants to \opendrive{} bundled with their physical properties and specifying their dynamic behavior.
+The behavior is organized in maneuvers which are sequences of actions like change lane, brake, accelerate and adapt the distance to other participants.
+\openscenario{} is capable of defining conditions that trigger maneuvers as soon as they are satisfied.
+The variety of conditions include \gls{ttc}, time headaway, (relative) speed, traveled distance, speed, acceleration or reaching a certain position.
+Since \openscenario{} is based on the \gls{xml} the dynamic behavior is fixed during runtime.
+Hence maneuvers can not do any computations throughout a simulation \eg{} calculate steering angles or any other information not directly provided by the simulator.\\
+Another very popular format is \commonroad{}~\cite{commonRoad} which focuses solely on path planning problems.
+\commonroad{} scenarios are only capable to define lanes, obstacles and cars.
+A car can be associated with a list of states describing the movements of the vehicle.
+Each state consists of a time step, a position, an orientation of the participant and its current speed.
+The speed as well as the position may be not specified exactly but with an interval enabling to formulate uncertainty of these attributes.
+However, \commonroad{} does not guaranty that specified movements are realistic.
+Hence it is needed to check feasibility of movements separately beforehand.
+The definition of roads in \commonroad{} consists of two sequences of points describing the left and the right border of a lane whereas the definition of roads in the simulator I will use in my work (See \autoref{sec:testCycle}) describes roads by a sequence of center points and the current width of a lane.
+The simulator interpolates this sequence as well as the widths to generate a smooth curvature.
+So the simulator can not accurately visualize arbitrary lanes of \commonroad{} scenarios.
+Concerning the definition of test criteria \commonroad{} is restricted to the definition of goal regions where the car has to get to in order to pass a test.\\
+\paracosm{}~\cite{paracosm} offers test case description combined with a simulation architecture.
+It defines a synchronous reactive programming language whose main concept are reactive objects which contain geometric and graphical features of physical objects bundled with their behavior.
+These are internally represented using 3D meshes.
+Each reactive object defines input and output streams of data through which objects can communicate to each other and be composed to more complex objects in a flexible way.
+Actual computations on or analysis of data are in this context equivalent to stream transformations.
+\paracosm{} also allows sensor data to be shipped with test scenarios \eg{} depth images.
+Furthermore \paracosm{} is capable of generating test cases automatically but which are almost random.
+However, \paracosm{} does not provide any constructs for specifying test criteria.
+Additionally the internal representation is not compatible with any other well known simulator than the one \paracosm{} comes with.
+This simulator is not able to precisely reflect physical behaviors.
+The paper presenting \paracosm{}~\cite{paracosm} is not clear about how \glspl{ai} can communicate with the simulation and there is no information about any performance measures. It is also not clear about whether \paracosm{} can be executed in parallel or whether its processes can be distributed.\\
+J.\ Bach, S.\ Otten and E.\ Sax follow in~\cite{modelBasedDescription} a model based approach for describing scenarios.
+In contrast to other approaches this approach focuses on creating a description scheme that is not only comprehensive but also human-readable and abstracts from a scenario to a logical level.
+A main point is the abstraction in terms of the separation of spatial and temporal information.
+This separation allows the definition of acts which describe the current situation.
+Acts are connected by events triggering a transition between them.
+Each act is associated with exactly one event.
+Thus the sequence of acts is linear.
+Every car in a scenario has multiple perception layers of different sizes that can be used for triggering events.
+The movements of participants are specified based on a predefined set of maneuvers.
+So the description of behaviors of \glspl{av} and the relation between acts may not be flexible enough for testing a wide range of diverse \glspl{adas}.\par
+
+S.\ Liu, J.\ Tang, C.\ Wang, Q.\ Wang and J-L.\ Gaudiot present in ``A Unified Cloud Platform for Autonomous Driving''~\cite{unifiedCloud} a cloud infrastructure which is explicitly geared towards testing \glspl{av}.
+This infrastructure focuses on high resource utilization, high performance and low management overhead.
+For implementation the authors use \spark{}~\cite{spark} for distributed computing, \alluxio{}~\cite{alluxio} for allowing distributed storage and \opencl{}~\cite{openCL} for optimizing the performance of the \gls{gpu} intensive simulations.
+Furthermore the paper mentions frameworks like \hadoop{}~\cite{hadoop} and reasons about them why the authors used some of them or not.
+Since the paper deals with some of the problems of \autoref{sec:problem} it is interesting for my work concerning which tools and frameworks to use.\\
+\cloudi{}~\cite{cloudI} is a basic cloud implementation based on Erlang and has a \gls{soa}.
+The main aspects are efficient messaging, fault tolerance and scalability.
+\cloudi{} comes with support for many programming languages (\eg{} Java, C/C++, Python, Elixir, Go and Haskel), many protocols and multiple \glspl{dbms}.
+In addition, it provides implementations of routing algorithms and authentication mechanisms.
+Since it is based on \gls{soa} it uses heavy weighted services and the granularity necessary for controlling simulations and exchanging information with \glspl{ai} may not be good enough.\par
+
+\opends{}~\cite{opends} is a java based cross platform simulator specialized for simulating \glspl{av}.
+It utilizes the capabilities of the physics library \jbullet{}~\cite{jBullet} and therefore provides a very realistic behavior of participants in the simulation.
+It uses the \jmonkey{}~\cite{jmonkey} framework for generating the graphical representation of the simulation and the \gls{lwjgl} for utilizing the \gls{gpu} plus it is capable of generating scenarios based on \opendrive{} descriptions.
+However, \opends{} lacks physical properties and calculations including detailed damage and behavior of the bodywork and therefore a detailed driving behavior.\\
+The open source project \apollo{}~\cite{apollo} is a comprehensive platform offering a high performance and flexible architecture for the complete life cycle of developing, testing and deploying self driving cars.
+It supports many types of sensors \eg{} \gls{lidar} sensors, cameras, radars and ultrasonic sensors.
+\apollo{} ships with software components to localize traffic participants, to percept the environment and to plan routes.
+Since version 3.5 it additionally comes with a cloud service based simulation platform.
+Further \apollo{} contains a web application called \dreamview{} which visualizes the current output of relevant modules, shows the status of hardware components, offers debugging tools, activates or disables modules and allows to control an \gls{av}.
+However \apollo{} does not provide test case criteria which consider complete scenarios or multiple traffic participants at once.\\
+\autoware{}~\cite{autoware, autowareOpen, autowareOnBoard} is another comprehensive open source project.
+It builds a complete ecosystem containing algorithms for localization, perception, detection, prediction and planning, containing predefined maps and containing the capability to handle real sensors and vehicles.
+It also provides the \gls{lgsvl} simulator which can visualize information like perception data or status of other participants.
+\autoware{} works with \rosbag{} files~\cite{rosbag} which allow to record, replay and debug executed simulations.
+The environment description used with \autoware{} are pixel clouds.
+So working with \autoware{} requires to create time consuming pixel clouds and to rely on the perception algorithm since this is the only source of information about the environment.
+
+\subsection{Technical Background}
+\textbf{Synchronous simulation} is an execution strategy a simulation can follow.
+A simulation based on this strategy calculates the progress \glspl{av} make in a certain time interval and pauses.
+When paused the simulation can call \glspl{ai} and request them for commands controlling \glspl{av} or the simulation.
+After the simulator applied these commands it resumes if the simulation is not aborted and the process starts over.\par
+
+Both simulations and test cases in my work are based on logical time namely \textbf{ticks}~\cite{tickrate}.
+A tick is a time interval of predefined length in which the simulator calculates the changes to the environment plus to all traffic participants and applies them to the simulation.
+A tick is the smallest logical time unit.

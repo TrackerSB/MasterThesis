@@ -1,0 +1,28 @@
+\begin{tikzpicture}[%
+    ->,
+    >=stealth
+]
+    \node (start) {};
+    \node[right=of start] (preconds) {Precondition};
+    % \node[below=of preconds] (skipped) {\underline{\vsmskipped{}}}; % FIXME Does not work
+    \node[below=of preconds] (skipped) {\underline{\code{SKIPPED}}};
+    \node[right=of preconds] (fail) {Fail criterion};
+    % \node[below=of fail] (tcFail) {\underline{\vsmfailed{}}}; % FIXME Does not work
+    \node[below=of fail] (tcFail) {\underline{\code{FAILED}}};
+    \node[right=of fail] (success) {Success criterion};
+    % \node[below=of success] (tcSuccess) {\underline{\vsmsucceeded{}}}; % FIXME Does not work
+    \node[below=of success] (tcSuccess) {\underline{\code{SUCCEEDED}}};
+    % \node[right=of success] (undetermined) {\underline{\vsmunknown{}}}; % FIXME Does not work
+    \node[right=of success] (undetermined) {\underline{\code{UNKNOWN}}};
+
+    \path (start) edge (preconds);
+    \draw[red] (preconds) edge (skipped);
+    \draw[green] (preconds) edge[bend left] (fail);
+    \draw[blue] (preconds) edge[bend right] (fail);
+    \draw[green] (fail) edge (tcFail);
+    \draw[red] (fail) edge[bend left] (success);
+    \draw[blue] (fail) edge[bend right] (success);
+    \draw[green] (success) edge (tcSuccess);
+    \draw[red] (success) edge[bend left] (undetermined);
+    \draw[blue] (success) edge[bend right] (undetermined);
+\end{tikzpicture}

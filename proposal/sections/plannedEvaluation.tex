@@ -1,0 +1,79 @@
+%!TEX root = ../proposal.tex
+\section{Planned Evaluation}
+The evaluation divides into a quantitative and a qualitative part.
+The dataset will be collected during the seminar ``Search-based Software Engineering for Testing Autonomous Cars'' at the university of Passau which takes place in the summer term 2019.
+
+%\draft{%
+%    The qualitative part investigates whether the proposed formalization for test cases is a capable of describing all proposed \glspl{adas}.\\
+%    FIXME Can the result be ``surprising'' in any way?\\
+%    Investigate which \glspl{adas} can be described?
+%}
+%
+%\draft{Investigate accuracy of load prediction somehow?}
+%
+%\draft{%
+%    How to test runtime overhead with external \glspl{ai}?
+%    How does efficiency of protocol change with an increasing amount of data?\\
+%    Is it interesting?
+%    Could it be surprising?\\
+%    Main factor: network latency\\
+%    Well\ldots Having an \gls{ai} externally is slower than having it on the same machine\ldots\\
+%}
+%
+%\draft{%
+%    Check runtime behavior of verification with an increasing number of test criteria?
+%    This may be too complicated to check (Many diverse criteria, depth of criteria,\ldots).\\
+%    First, run simulation with runtime verification.
+%    Secondly, run it the same amount of ticks but without runtime verification.
+%    A comparison should yield the runtime overhead of the verification.
+%}
+%
+%\draft{Check calculation time for ticks with an increasing number of participants?}
+%
+%\draft{%
+%    Is the remote/synch approach feasible for multiple \glspl{ai}?
+%    Basically\ldots
+%    Yes.
+%    It is explicitly designed for that.
+%    I don't see any reason why this could go wrong (at least none that could be evaluated within the thesis).
+%}
+%
+%\draft{%
+%    Is the formalization able to handle automatic test generation?
+%    Is there any reason for the formalization to care about whether a test case was generated or written by hand?
+%    Everything can be generated automatically but the \glspl{ai} itself and their access points.
+%    What is ``type of generation''?
+%}
+%
+%\draft{The simulator needs especially good GPUs \(\Rightarrow\) \Gls{ram} is not interesting}
+
+\subsection{Quantitative Analysis of Runtime Verification}
+The quantitative analysis evaluates the runtime complexity of the test criteria verification based on the complexity of the lanes and the complexity of test criteria definitions.\\
+The complexity of the lane network is defined by the number of waypoints \(N_W\) and the average tolerances \(T_W\).
+The higher \(N_W\) and the lower \(T_W\) the more complex is the lane network.\\
+The complexity of the test criteria definition is defined by the number of test criteria \(N_C\) and the average depth \(D_C\) where \(N_C\) is the number of \glspl{sc} plus the number of \glspl{vc}.
+The higher \(N_C\) and the higher \(D_C\) the more complex is a test criteria definition.\\
+The use of \drivebuild{} during the seminar allows to collect much data about test cases and their execution.
+Each executed test case is stored in the \gls{dbms} along with their results, statistics about them and the execution times of every call to the test criteria verification.
+For the evaluation I will create tuples \((N_W, T_W, N_C, D_C, T)\) for every execution time \(T\).
+Based on these I will create four graphs grouping the tuples by \(N_W, T_W, N_C\) or \(D_C\) and averaging over \(T\).
+All graphs yield a runtime complexity.\\
+In the end, the runtime complexities determine the maximum complexity of test criteria definitions that is feasible and which of \(N_W, T_W, N_C\) and \(D_C\) is the most crucial.
+%\draft{(NOTE This is especially interesting for load prediction.)}\\
+%\draft{%
+%    FIXME What about absolute times?
+%    If absolute times are really small the runtime complexity is not as interesting anymore.
+%}\\
+%\draft{%
+%    FIXME Due to lazy evaluation resulting from \glspl{vc}: Do complexity of test criteria definitions and runtime complexity correlate?
+%    The runtime complexity may be very dependant on the actual test case.
+%}
+
+\subsection{Qualitative Study of Comprehensiveness}
+The qualitative study investigates the comprehensiveness of \drivebuild{} in terms of the capabilities of the formalization and the application areas for which \drivebuild{} can be used.
+I will ask participants of the seminar (about 11 people) which kinds of test cases they realize, how they use \drivebuild{} for automation, benchmarks and training \glspl{ai} and which problems they had to face or were not able to solve.
+When one of the participants encounters a problem I will investigate whether the current system is able to solve it.
+If this is not the case I will explore how \drivebuild{} would have to be extended to solve the problem and decide whether I add it.
+I will document all of these steps.\\
+In the end, this documentation shows the capabilities of \drivebuild{}.
+I will be able to show problems of the original system, whether these problems could be solved and how they where solved if added.

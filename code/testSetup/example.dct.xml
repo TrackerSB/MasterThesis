@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<driveCloudTestSuite xmlns="https://www.drivecloud.com"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="https://www.drivecloud.com driveCloud1.xsd">
+    <author>author</author>
+    <creationDate>date</creationDate>
+    <driveCloudEnvironment type="envType" ref="example.dce.xml" />
+    <fps>fps</fps>
+    <conditionConfig>
+        <frequency>ticks</frequency>
+    </conditionConfig>
+    <aiConfig ref="participantId">
+        <!-- TODO How to communicate with AI? -->
+        <contact>url to post to</contact>
+        <!-- TODO Use proto (Protocol buffers) files for data exchange? -->
+        <!-- TODO Which information to get from AI? Steering/brake/throttle/gear/speed/...? -->
+        <frequency>ticks</frequency>
+        <timeout>ticks</timeout> <!-- Default: 3*frequency? -->
+        <retries>number</retries>
+    </aiConfig>
+    <namedRegion name="regionId">
+        <point [...] />
+        ...
+        <point [...] />
+    </namedRegion>
+    <precondition> <!-- Violation => skip -->
+        <connective>
+            ...
+        </connective>
+        <validation>
+            ...
+        </validation>
+        ...
+    </precondition>
+    <success> <!-- NOTE Violation => fail -->
+        <connective>
+            ...
+        </connective>
+        <validation>
+            ...
+        </validation>
+        ...
+    </success>
+    <fail> <!-- NOTE Satisfaction => fail -->
+        <connective>
+            ...
+        </connective>
+        <validation>
+            ...
+        </validation>
+        ...
+    </fail>
+</driveCloudTestSuite>
+
+<whileAtTime since="from" until="to">
+    ...
+</whileAtTime>
+
+<whileInRegion region="regionId"
+               participant="participantId">
+    ...
+</whileInRegion>
+
+<whileOnLane lane="laneId"
+             participant="participantId">
+    ...
+</whileOnLane>
+
+<!-- TODO Range of values? -->
+<damage ref="participantId"
+        type="type"
+        damage="damage" />
+
+<onLane ref="participantId"
+        lane="laneId" />
+
+<region ref="participantId"
+        region="regionId">
+    <!-- FIXME Only polygons or certain shapes? -->
+    <!-- FIXME Contact with area or completely within? Allow even percentage? -->
+</region>
+
+<speed ref="participantId"
+       speed="speed"
+       mode="min|max" /> <!-- NOTE speed in m/s -->

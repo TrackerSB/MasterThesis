@@ -1,0 +1,89 @@
+%!TEX root = ../thesis.tex
+\begin{tikzpicture}[%
+    ->,
+    >=stealth
+]
+\tikzset{%
+    node distance=2.5
+}
+\node (tester) {Tester};
+\node[below=of tester] (tcmanager) {\Glstext{tcmanager}};
+\node[right=of tester] (ai) {\Glstext{ai}};
+\node[below=of ai] (communicator) {{{\scshape Communicator}}};
+\node[below=4 of tcmanager] (simcontroller) {\Glstext{simcontroller}};
+\node[left=1.3 of simcontroller] (transformer) {{{\scshape Transformer}}};
+\node[above=.1 of transformer] (fitExtension) {};
+\node[left=1.9 of transformer] (generator) {{{\scshape Generator}}};
+\node[above=1.8 of transformer] (dbms) {\Glstext{dbms}};
+\node[above=1.7 of dbms] (stats) {\Glstext{statsmanager}};
+\node[above=of stats] (researcher) {Researcher};
+\node[below=of transformer] (kptransformer) {\Glstext{kptransformer}};
+\node[below=of simcontroller] (verificator) {\mltn{Runtime Verification\\Process 1\ldots N}};
+\node[right=0.5 of verificator] (simulatorA) {Simulation 1\ldots N};
+
+% Client backgrounds
+\node[zlayer=back,fill=clusterClient,fit={(researcher)}] {};
+\node[zlayer=back,fill=clusterClient,fit={(tester)}] {};
+\node[zlayer=back,fill=clusterClient,fit={(ai)}] {};
+% Stack 1
+\node[below right=-0.5mm and 0.5mm of ai.south west] (aiStackA) {};
+\node[below right=-0.5mm and -0.5mm of ai.south east] (aiStackB) {};
+\node[below right=0.5mm and -0.5mm of ai.north east] (aiStackC) {};
+\node[zlayer=back,fill={rgb,255:red,112;green,112;blue,255},fit={(aiStackA)(aiStackB)(aiStackC)},inner sep=0] (aiStackA) {};
+% Stack 2
+\node[below right=-1.5mm and 0.5mm of aiStackA.south west] (aiStackAA) {};
+\node[below right=-1.5mm and -1.5mm of aiStackA.south east] (aiStackBB) {};
+\node[below right=0.5mm and -1.5mm of aiStackA.north east] (aiStackCC) {};
+\node[zlayer=back,fill={rgb,255:red,0;green,0;blue,255},fit={(aiStackAA)(aiStackBB)(aiStackCC)},inner sep=0] {};
+% Redraw previous stacks in reverse order
+\node[zlayer=back,fill={rgb,255:red,112;green,112;blue,255},fit={(aiStackA)(aiStackB)(aiStackC)},inner sep=0] (aiStackA) {};
+\node[zlayer=back,fill=clusterClient,fit={(ai)}] {};
+
+% SimNode backgrounds
+\node[zlayer=back,fill=clusterSimNode,fit={(simulatorA)(kptransformer)(verificator)(generator)(fitExtension)}] (server) {};
+% Stack 1
+\node[below right=0mm and 3mm of server.south west] (simNodeStackA) {};
+\node[below right=0mm and 0mm of server.south east] (simNodeStackB) {};
+\node[below right=3mm and 0mm of server.north east] (simNodeStackC) {};
+\node[zlayer=back,fill={rgb,255:red,112;green,255;blue,112},fit={(simNodeStackA)(simNodeStackB)(simNodeStackC)},inner sep=0] (stackA) {};
+% Stack 2
+\node[below right=0mm and 3mm of stackA.south west] (simNodeStackAA) {};
+\node[below right=0mm and 0mm of stackA.south east] (simNodeStackBB) {};
+\node[below right=3mm and 0mm of stackA.north east] (simNodeStackCC) {};
+\node[zlayer=back,fill={rgb,255:red,0;green,220;blue,0},fit={(simNodeStackAA)(simNodeStackBB)(simNodeStackCC)},inner sep=0] {};
+% Redraw previous stacks in reverse order
+\node[zlayer=back,fill={rgb,255:red,112;green,255;blue,112},fit={(simNodeStackA)(simNodeStackB)(simNodeStackC)},inner sep=0] (stackA) {};
+\node[zlayer=back,fill=clusterSimNode,fit={(simulatorA)(kptransformer)(verificator)(generator)(fitExtension)}] (serverRedraw) {};
+
+% MainApp background
+\node[zlayer=back,fill=clusterMicroService,fit={(tcmanager)(communicator)(stats)}] (microserviceA) {};
+
+% DBMS background
+\node[zlayer=back,fill=clusterDbms,fit={(dbms)}] (dbmsComponent) {};
+
+\path
+    (tester) edge node[above]{SimulationID} node[below]{VehicleID} (ai)
+    (tester) edge[bend right] node[rotate=90,above]{Test Case} (tcmanager)
+    (dbms) edge (stats)
+    (stats) edge (researcher)
+    (researcher) edge (stats)
+    (simcontroller) edge (dbms)
+    (simcontroller) edge (transformer)
+    (transformer) edge (simcontroller)
+    (tcmanager) edge[bend right] node[rotate=-90,above] {SimulationID} (tester)
+    (transformer) edge node[rotate=90,above]{Criteria} (kptransformer)
+    (kptransformer) edge (transformer)
+    (transformer) edge node[above] {Lanes, \Glspl{av},} (generator)
+    (transformer) edge node[below] {Obstacles} (generator)
+    (generator) edge (transformer)
+    (tcmanager) edge[bend right] node[rotate=90,above] {Test Case} (simcontroller)
+    (simcontroller) edge[bend right] node[rotate=-90,above] {SimulationID} (tcmanager)
+    (simcontroller) edge node[rotate=90,above] {Runtime} (verificator)
+    (verificator) edge node[rotate=90,below] {Verification} (simcontroller)
+    (simcontroller.south east) edge (simulatorA)
+    (simulatorA) edge (simcontroller.south east)
+    (simcontroller.north east) edge (communicator)
+    (communicator) edge (simcontroller.north east)
+    (communicator) edge (ai)
+    (ai) edge (communicator);
+\end{tikzpicture}

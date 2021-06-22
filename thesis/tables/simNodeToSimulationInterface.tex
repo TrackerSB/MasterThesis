@@ -1,0 +1,21 @@
+%!TEX root = ../thesis.tex
+\def\tabularxcolumn#1{m{#1}}
+\begin{tabularx}{.65\linewidth}{X l l}
+    \toprule
+    \bfseries Action & \bfseries Parameter Types & \bfseries Return Type \\
+    \midrule
+    vids & SimulationID & VehicleIDs \\
+    \midrule
+    isRunning & SimulationID & Bool \\
+    \midrule
+    pollSensors & SimulationID & Void \\
+    \midrule
+    verify & SimulationID & VerificationResult \\
+    \midrule
+    requestAiFor & \makecell[l]{SimulationID\\VehicleID} & Void \\
+    \midrule
+    steps & \makecell[l]{SimulationID\\Num} & Void \\
+    \midrule
+    stop & \makecell[l]{SimulationID\\TestResult} & Void \\
+    \bottomrule
+\end{tabularx}

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://www.drivecloud.com"
+           xmlns="https://www.drivecloud.com"
+           elementFormDefault="qualified">
+
+    <!-- dce.xml files -->
+    <xs:element name="driveCloudEnvironment">
+        <xs:complexType>
+            <xs:sequence> <!-- FIXME Can not use xs:all here -->
+                <xs:element name="author" type="xs:string" />
+                <xs:element name="creationDate" type="xs:date" />
+                <xs:element name="lane" type="laneletType" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="participant" type="participantType" maxOccurs="unbounded" /> <!-- TODO Make maxOccurs unbounded? -->
+                <xs:element name="obstacle" type="obstacleType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="pointType">
+        <xs:attribute name="x" type="xs:decimal" use="required" />
+        <xs:attribute name="y" type="xs:decimal" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="boundType">
+        <xs:sequence>
+            <xs:element name="point" type="pointType" minOccurs="2" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="laneletType">
+        <xs:all>
+            <xs:element name="leftBound" type="boundType" />
+            <xs:element name="rightBound" type="boundType" />
+        </xs:all>
+        <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="speedType">
+        <xs:simpleContent>
+            <xs:extension base="xs:nonNegativeInteger">
+                <xs:attribute name="mode">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="speed"/>
+                            <xs:enumeration value="limit"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="waypointType">
+        <xs:complexContent>
+            <xs:extension base="pointType">
+                <xs:attribute name="radius" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:decimal">
+                            <xs:minExclusive value="0" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="stateType">
+        <xs:sequence> <!-- FIXME Can not use xs:all here -->
+            <xs:element name="waypoint" type="waypointType" />
+            <xs:element name="speed" type="speedType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="aiControlled" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="orientationType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="360" />
+            <xs:fractionDigits value="2" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="initialStateType">
+        <xs:complexContent>
+            <xs:extension base="stateType">
+                <xs:sequence> <!-- FIXME Can not use xs:all here -->
+                    <xs:element name="orientation" type="orientationType" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="participantType">
+        <xs:all>
+            <xs:element name="initialState" type="initialStateType" />
+            <xs:element name="path">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="state" type="stateType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="obstacleType">
+        <xs:all>
+            <xs:element name="shape">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="point" type="pointType" minOccurs="3" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+        <xs:attribute name="id" type="xs:ID" use="required" />
+    </xs:complexType>
+
+    <!-- dct.xml files -->
+    <xs:element name="driveCloudTestSuite">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="author" type="xs:string" />
+                <xs:element name="creationDate" type="xs:date" />
+                <xs:element name="driveCloudEnvironment">
+                    <xs:complexType>
+                        <xs:attribute name="ref" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="DriveCloudEnvironment" />
+                                    <xs:enumeration value="CommonRoad" />
+                                    <xs:enumeration value="OpenDRIVE" />
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="fps" type="xs:positiveInteger" minOccurs="1" maxOccurs="1" />
+                <xs:element name="conditionConfig" type="conditionConfigType" minOccurs="0" maxOccurs="1" />
+                <xs:element name="aiConfig" type="aiConfigType" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element name="namedRegion" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="point" type="pointType" minOccurs="3" maxOccurs="unbounded" />
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string" use="required" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="precondition" type="conditionRootType" minOccurs="0" maxOccurs="1" />
+                <xs:element name="success" type="conditionRootType" minOccurs="0" maxOccurs="1" />
+                <xs:element name="fail" type="conditionRootType" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="conditionConfigType">
+        <xs:all minOccurs="1">
+            <xs:element name="frequency" type="xs:positiveInteger" />
+        </xs:all>
+    </xs:complexType>
+
+    <xs:complexType name="aiConfigType">
+        <xs:all>
+            <xs:element name="contact" type="xs:anyURI" />
+            <xs:element name="frequency" type="xs:positiveInteger" />
+            <xs:element name="timeout" type="xs:positiveInteger" />
+            <xs:element name="retries" type="xs:nonNegativeInteger" />
+        </xs:all>
+        <xs:attribute name="ref" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="validationType">
+        <xs:choice>
+            <xs:group ref="conditionGroup" />
+            <xs:element ref="condition" />
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:element name="validation" type="validationType" abstract="true" />
+    <xs:element name="whileInRegion" substitutionGroup="validation">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="validationType">
+                    <xs:attribute name="region" type="xs:string" use="required" />
+                    <xs:attribute name="participant" type="xs:string" use="required" />
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="intervalType">
+        <xs:union memberTypes="xs:nonNegativeInteger">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="end" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:element name="whileAtTime" substitutionGroup="validation">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="validationType">
+                    <xs:attribute name="since" type="intervalType" default="0" />
+                    <xs:attribute name="until" type="intervalType" default="end" />
+                    <!-- TODO Force @to > @from using assertions -->
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="whileOnLane" substitutionGroup="validation">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="validationType">
+                    <xs:attribute name="lane" type="xs:string" use="required" />
+                    <xs:attribute name="participant" type="xs:string" use="required" />
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:group name="conditionGroup">
+        <xs:choice>
+            <xs:element ref="connective" />
+            <xs:element ref="validation" />
+        </xs:choice>
+    </xs:group>
+    <xs:complexType name="conditionRootType">
+        <xs:group ref="conditionGroup" minOccurs="1" maxOccurs="1" />
+    </xs:complexType>
+    <xs:complexType name="conditionNodeType">
+        <xs:group ref="conditionGroup" minOccurs="2" maxOccurs="unbounded" />
+    </xs:complexType>
+
+    <xs:element name="connective" abstract="true" />
+    <xs:element name="and" substitutionGroup="connective" type="conditionNodeType" />
+    <xs:element name="or" substitutionGroup="connective" type="conditionNodeType" />
+    <xs:element name="not" substitutionGroup="connective" type="conditionRootType" />
+
+    <!-- NOTE Conditions can have one of three values (true, false, unknown). -->
+    <xs:complexType name="conditionType">
+        <xs:attribute name="ref" type="xs:string" use="required" />
+    </xs:complexType>
+    <xs:element name="condition" type="conditionType" abstract="true" />
+
+    <xs:complexType name="decimalDamage">
+        <xs:complexContent>
+            <xs:extension base="conditionType">
+                <xs:attribute name="type" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="overall" />
+
+                            <xs:enumeration value="doorglass_fl" />
+                            <xs:enumeration value="doorglass_fr" />
+                            <xs:enumeration value="doorglass_rl" />
+                            <xs:enumeration value="doorglass_rr" />
+                            <xs:enumeration value="driveshaft" />
+                            <xs:enumeration value="fendersignal_l" />
+                            <xs:enumeration value="fendersignal_r" />
+                            <xs:enumeration value="foglightglass_l" />
+                            <xs:enumeration value="foglightglass_r" />
+                            <xs:enumeration value="headlightglass_l" />
+                            <xs:enumeration value="headlightglass_r" />
+                            <xs:enumeration value="radiator" />
+                            <xs:enumeration value="radtube" />
+                            <xs:enumeration value="sideglass_l" />
+                            <xs:enumeration value="sideglass_r" />
+                            <xs:enumeration value="sunroot" />
+                            <xs:enumeration value="tailgatelight_l" />
+                            <xs:enumeration value="tailgatelight_r" />
+                            <xs:enumeration value="taillightglass" />
+                            <xs:enumeration value="taillightglass_l" />
+                            <xs:enumeration value="taillightglass_r" />
+                            <xs:enumeration value="windshield" />
+                            <!-- TODO Recognize also groups of damage (body, energyStorage, engine, powertrain and wheels)? -->
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="damage" type="xs:nonNegativeInteger" use="required" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="booleanDamage">
+        <xs:complexContent>
+            <xs:extension base="conditionType">
+                <xs:attribute name="type" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <!-- TODO <xs:enumeration value="someBooleanDamagePart" /> -->
+                            <!-- NOTE E.g. engineDisabled, engineLockedUp, engineReducedTorque, catastrophicOverrevDamage, mildOverrevDamage, catastrophicOverTorqueDamage, mildOverTorqueDamage, engineHydrolocked, engineIsHydrolocking, headGasketDamaged, blockMelted,... -->
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="damage" type="xs:nonNegativeInteger" use="required" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="damageDecimal" type="decimalDamage" substitutionGroup="condition" />
+    <xs:element name="damageBoolean" type="booleanDamage" substitutionGroup="condition" />
+    <!-- FIXME How to combine these two elements? -->
+
+    <xs:element name="onLane" substitutionGroup="condition">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="conditionType">
+                    <xs:attribute name="lane" type="xs:string" use="required" />
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="region" substitutionGroup="condition">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="conditionType">
+                    <xs:attribute name="region" type="xs:string" use="required" />
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="speed" substitutionGroup="condition">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="conditionType">
+                    <xs:attribute name="speed" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:decimal">
+                                <xs:minInclusive value="0" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="mode" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="min" />
+                                <xs:enumeration value="max" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<environment xmlns="http://drivebuild.com"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://drivebuild.com drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <timeOfDay>0</timeOfDay>
+
+    <lanes>
+        <lane markings="true">
+            <laneSegment x="0" y="0" width="8"/>
+            <laneSegment x="50" y="0" width="8"/>
+            <laneSegment x="80" y="20" width="8"/>
+            <laneSegment x="100" y="20" width="8"/>
+        </lane>
+        <lane>
+            <laneSegment x="50" y="-20" width="6"/>
+            <laneSegment x="30" y="50" width="6"/>
+        </lane>
+    </lanes>
+
+    <obstacles>
+        <!-- [...] Obstacle definitions -->
+    </obstacles>
+</environment>

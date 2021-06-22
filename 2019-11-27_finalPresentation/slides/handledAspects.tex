@@ -1,0 +1,32 @@
+\plainFrame{%
+    \centering
+    \smartdiagramset{%
+        set color list={colorFormalize,colorExecute,colorVerify,colorGatherData}
+    }
+    \BubbleDiagramAnimated[%
+        orientation=-1
+    ]{%
+        \drivebuild{},
+        Formalization,
+        Execution,
+        Runtime\\Verification,
+        Data\\Collection
+    }
+    % \smartdiagram[bubble diagram]{%
+    %     \drivebuild{},
+    %     Formalization,
+    %     Execution,
+    %     Runtime\\Verification,
+    %     Gathering\\Data
+    % }
+    \smartdiagramset{
+        set color list={
+            red!40,
+            cyan!40,
+            blue!40,
+            green!40,
+            orange!40
+        }
+    }
+}
+

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<criteria xmlns="http://drivebuild.com"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://drivebuild.com ../drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <version>1</version>
+    <name>Test A</name>
+    <environment>environment.dbe.xml</environment>
+    <stepsPerSecond>10</stepsPerSecond> <!-- Defines in how many steps the simulation divides each second -->
+    <aiFrequency>50
+    </aiFrequency> <!-- Defines how many steps to simulate before requesting AIs and cars in TRAINING mode -->
+
+    <participants>
+        <participant id="ego" model="ETK800"> <!-- Definition of a participant -->
+            <initialState x="0" y="0" movementMode="TRAINING" orientation="90"/>
+            <ai> <!-- Definition of which data the simulation shall provide about this participant -->
+                <position id="egoPosition"/>
+                <speed id="egoSpeed"/>
+                <steeringAngle id="egoSteeringAngle"/>
+                <camera id="egoFrontCamera" width="800" height="600" fov="60" direction="FRONT"/>
+                <!--<roadCenterDistance id="egoLaneDist"/>-->
+            </ai>
+            <movement> <!-- Definition of the movement of this participant -->
+                <waypoint x="0" y="0" movementMode="TRAINING" tolerance="1"/>
+                <waypoint x="0" y="100" movementMode="TRAINING" tolerance="1"/>
+                <waypoint x="0" y="200" movementMode="TRAINING" tolerance="1"/>
+                <waypoint x="0" y="300" movementMode="TRAINING" tolerance="1"/>
+                <waypoint x="0" y="350" movementMode="TRAINING" tolerance="1"/>
+            </movement>
+        </participant>
+        <participant id="nonEgo" model="ETK800">
+            <initialState x="0" y="200" movementMode="TRAINING" orientation="90"/>
+            <ai>
+                <position id="nonEgoPosition"/>
+                <speed id="nonEgoSpeed"/>
+                <steeringAngle id="nonEgoSteeringAngle"/>
+                <camera id="nonEgoLeftCamera" width="800" height="600" fov="60" direction="LEFT"/>
+                <!--<roadCenterDistance id="nonEgoLaneDist"/>-->
+            </ai>
+            <movement>
+                <waypoint x="0" y="200" movementMode="TRAINING" tolerance="1" speedLimit="100"/>
+                <waypoint x="0" y="210" movementMode="TRAINING" tolerance="1"/>
+                <waypoint x="0" y="300" movementMode="TRAINING" tolerance="1"/>
+                <waypoint x="0" y="400" movementMode="TRAINING" tolerance="1"/>
+                <waypoint x="0" y="450" movementMode="TRAINING" tolerance="1"/>
+            </movement>
+        </participant>
+    </participants>
+
+    <!-- If these criteria are met the test is skipped -->
+    <!--<precondition>
+        NOTE Tests can also define preconditions that have to be met in order to be able to decide whether a test succeeded
+    </precondition>-->
+
+    <success> <!-- If these criteria are met the test is considered successful -->
+        <and>
+            <scArea participant="ego" points="(-10,320);(10,320);(10,390);(-10,390)"/>
+            <scArea participant="nonEgo" points="(-10,430);(10,430);(10,490);(-10,490)"/>
+            <!--<scPosition participant="ego" x="0" y="350" tolerance="3"/>-->
+            <!--<scPosition participant="nonEgo" x="0" y="450" tolerance="3"/>-->
+        </and>
+    </success>
+
+    <failure> <!-- If these criteria are met the test is considered failed -->
+        <or>
+            <scDamage participant="ego"/>
+            <scLane participant="ego" onLane="offroad"/>
+            <scDamage participant="nonEgo"/>
+            <scLane participant="nonEgo" onLane="offroad"/>
+        </or>
+    </failure>
+</criteria>

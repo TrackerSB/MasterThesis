@@ -1,0 +1,193 @@
+%!TEX root = ../thesis.tex
+\section{State of the Art}\label{sec:stateOfTheArt}
+\Cref{sec:problemStatement} shows that simulation based testing of \glspl{av} is a complex task and there are many problems which have to be investigated.
+The following subsections explain and discuss current approaches for solving some of these problems.
+
+\subsection{Formalization of Environments and Criteria}
+Concerning the definition of test environments \opendrive{}~\cite{openDrive} is one of most popular formats for defining very comprehensive and very detailed environments.
+Many well known car manufacturers (\eg{} Audi, \gls{bmw} and Daimler) and other organizations like Fraunhofer, \gls{tum} and \gls{dlr} Institute of Robotics and Mechatronics use it.
+The format is \gls{xml} based and offers declarations for many different kinds of objects like signs, cross falls, rail roads, bridges and signals which may even dynamically change.
+Especially the definition of streets and rail roads can be very complex.
+Additionally these object can be enhanced with meta information.
+So \opendrive{} allows to define predecessor and successor lanes, neighbor lanes, complex junctions, parking spaces, acceleration strips, side walks, multiple different types of markings, reference lines for roads/junctions and rail road switches.
+Although \opendrive{} has many options and capabilities to define environment elements \opendrive{} on its own has neither the capability to add traffic participants nor to specify their movements nor to express any kind of test criterion.\\
+\opencrg{}~\cite{openCrg} is a \gls{xml} based format which extends \opendrive{}.
+It allows to increase the details of the roads defined in \opendrive{} by adding bumps and unevenness to road surfaces using \glspl{crg}.
+Therefore \opencrg{} already includes tons of predefined data measured on existing roads.\\
+\openscenario{}~\cite{openScenario} is a \gls{xml} based scheme to add traffic participants to \opendrive{} scenarios and bundles them with their physical properties and their dynamic behavior.
+The behavior is organized in maneuvers which are sequences of abstract actions like change lane, brake, accelerate and adapt the distance to other participants.
+\openscenario{} is capable to define conditions which trigger these maneuvers as soon as they are satisfied.
+The variety of conditions includes \gls{ttc}, time headaway, (relative) speed, traveled distance, speed, acceleration or reaching a certain position.
+Since \openscenario{} uses \gls{xml} for the description of the dynamic behavior it can not change during the simulation.
+Further maneuvers can not do any computations throughout a simulation \eg{} calculate steering angles or any other information which the underlying simulator does not directly provide.
+\openscenario{} is not able to define any kind of test criteria as well.\\
+Another very popular format for declaring environments is \commonroad{}~\cite{commonRoad} which focuses solely on path planning problems.
+\commonroad{} scenarios are only capable to define lanes, obstacles and cars.
+A car can be associated with a list of states that describe its movement.
+Each state consists of a logical timestamp and the current position, orientation and speed of the car.
+The speed as well as the position may be not specified exactly but with an interval which allows to formulate uncertainty of these attributes.
+However, since \commonroad{} bundles timestamps with positions it does not guaranty that specified movements are realistic.
+Hence it is needed to check feasibility of movements separately beforehand.
+The definition of lanes in \commonroad{} is based on lanelets~\cite{lanelets} which consist of two sequences of points that describe the left and the right border of a lane.
+In contrast the simulator I will use in my work (See \cref{sec:testCycle}) describes lanes with a sequence of road center points, the current width at each point and the number of left and right lanes.
+The simulator interpolates the sequence of road center points as well as the widths to generate a smooth curvature.
+As a result the simulator can visualize arbitrary lanelets of \commonroad{} scenarios with a guaranteed high accuracy.
+Concerning the definition of test criteria \commonroad{} is restricted to the definition of simple goal regions.
+If an \gls{av} reaches a goal region the test is considered successful and it failed otherwise.\\
+There is also a model based approach to describe scenarios~\cite{modelBasedDescription}.
+In contrast to other approaches this approach focuses on creating a description scheme that is not only comprehensive but also human-readable and abstracts from a scenario to a logical level.
+A main point is the abstraction in terms of the separation of spatial and temporal information.
+This separation allows the definition of acts which describe the current situation at some point during a test.
+Every act defines exactly one event which triggers a transition to another act in order to create a linear sequence of acts.
+All cars in a test have multiple perception layers of different sizes which surround the car.
+These perception layers define event triggers.
+The movements of participants are specified based on a predefined set of maneuvers.
+So the description of behaviors of \glspl{av} and the relation between acts may not be flexible enough to test a wide range of diverse \glspl{adas}.\\
+\geoscenario{}~\cite{geoScenario} is a based on the \gls{osm}~\cite{openStreetMap} standard \gls{dsl} to formalize test scenarios.
+The goal of this formalization is to introduce reproducibility of test cases by enabling testers to describe complex traffic situations.
+Additionally the formalization focuses on an abstraction from the underlying tools that perform tests to allow to exchange them easily.
+So \geoscenario{} allows to reuse well known existing tools like the \gls{josm}~\cite{josm} with minor changes and can easily utilize existing services like Bing Maps~\cite{bingMaps} and ESRI Maps~\cite{esriMaps}.\\
+\beepbeep{}~\cite{beepbeep} is a formal and declarative \gls{dsl} for \gls{cep} queries on event traces of vehicles.
+In contrast to other approaches it allows to define custom boolean queries and does not restrict \gls{cep} on a predefined set of boolean queries.
+Further it allows to describe non boolean queries and compose them using temporal logic based expressions in an exclusively declarative way.
+This strategy is very similar to the formalization which this work develops.
+Additionally \beepbeep{} can be used for real time evaluation.
+
+\subsection{Generation of Environments}
+\scenic{}~\cite{scenic} is a probabilistic \gls{dsl} which is geared towards the creation of training and test data sets for \gls{ml} systems.
+Its scenarios define an environment model that characterizes scenarios which are \eg{} realistic and describe certain types of interesting input.
+In contrast to other approaches \scenic{} allows to specify distributions on the parameters that define environments instead of using concrete values.
+Furthermore these environment models allow a formal analysis of the properties and the correctness of a given \gls{ml} system.\\
+The \gls{sml}~\cite{sml} framework allows to automatically generate complex scenarios which have static as well as dynamic elements.
+It is designed to author studies on the behavior of drivers in realistic traffic simulations.
+Therefore a \gls{sml} script declares events (\eg{} accidents) that occur to a driver under predefined conditions and behavior fractions which group a set of commands (\eg{} brake, steer and accelerate).
+Further it can compose these to supervisor elements which influence a simulated scenario.
+Since a \gls{sml} script is a \gls{xml} file the behavior elements are fixed during a simulation which comes with the same problems as \openscenario{} at least to a certain extent.
+Additionally events trigger modifications to a scenario during simulation time.
+So the \gls{sml} framework requires a simulator that can change its content during the execution of a simulation.\\
+An approach to implement a test generator is \gls{ac3r}~\cite{ac3r} which can reconstruct crashes by translating crash reports into simulations~\cite{crashReconstruction}.
+Therefore \gls{ac3r} uses \gls{nlp} to extract information from a semi-structured police report like provided by the \gls{nhtsa} database.
+The extracted information provides the geometry of the required roads as well as the initial positions of the involved participants.
+To determine the trajectories that led to the crash \gls{ac3r} applies heuristics.
+Finally, \gls{ac3r} generates a \beamng{} scenario that can simulate the crash.
+Additionally \gls{ac3r} offers a way of measuring the accuracy of the simulation compared to the input report and is capable to derive test cases which encode similar conditions under which the initial crash happened.
+This allows testers to check whether their \gls{ai} would have had an accident under the same or similar conditions too.\\
+Another approach is \asfault{}~\cite{asfault} which uses procedural content generation~\cite{proceduralContentGeneration}.
+\asfault{} focuses on testing lane keeping capabilities of \glspl{av}.
+Therefore it generates scenarios with exactly one road which an \gls{av} has to follow to pass the test.
+The curvature of the road is based on B-splines and a random number generator.\\
+Another approach is evolutionary computation~\cite{generationForRacingGames} which aims to generate single lane tracks with a high diversity.
+The paper measures the diversity of a track in terms of its curvature and speed profile.
+The more different types of curves concerning their length, their size and their angle and the more diverse the speeds an \gls{av} can reach on different sections of the generated track the more diverse it is considered.
+To achieve a high diversity the approach uses multi objective \glspl{ga} that evolve tracks with an as high as possible variety of turns and straight as well as driving speeds.
+
+\subsection{Simulators}
+\opends{}~\cite{opends} is a java based cross platform simulator which specializes to simulate \glspl{av}.
+It utilizes the capabilities of the physics library \jbullet{}~\cite{jBullet} and therefore provides a very realistic behavior of participants in the simulation.
+It bases the generation of the graphical representation for the simulation on the \jmonkey{}~\cite{jmonkey} framework and uses the \gls{lwjgl}~\cite{lwjgl} to utilize the \gls{gpu}.
+Further \opends{} has the capability to generate scenarios from \opendrive{} formalizations.
+However, \glspl{av} in \opends{} lack physical properties including a detailed damage report or the behavior of the bodywork and thus a detailed driving behavior.\\
+\simulAII{}~\cite{simulA2} is a \webots{}~\cite{webots} based simulator which aims to evaluate \glspl{adas}.
+To increase the realism of the simulations of \webots{} \simulAII{} introduces multiple agents that control and influence \glspl{av} regardless of any action of the user.
+These agents use a communication scheme which can not only implement communication with \webots{} but also exchange of data with real cars.
+Therefore \simulAII{} uses tools and libraries of the \ros{}~\cite{rosProject}.
+Although the agents make the simulations more real the physical behavior of objects does not allow highly accurate test executions.\\
+\carla{}~\cite{carla} is a simulator that is geared towards to simulate urban environments especially traffic.
+It comes with many assets and models including buildings, vehicles, streets and weather conditions to create detailed urban scenarios.
+\carla{} can only simulate vehicles and pedestrians that are abstracted by the concept of actors which represent the complete dynamic content.
+It uses a server multi-client architecture that allows to distribute the control of all actors across multiple nodes.
+Further it offers interfaces to manage all simulation related aspects \eg{} traffic generation, behavior of pedestrians and vehicles, weather conditions and sensors attached to any actor.
+The range of available sensors includes cameras, \gls{lidar}, depth and \gls{gps} sensors.
+Additionally \carla{} can create environments from \opendrive{} descriptions and integrates \gls{ros}.\\
+\airsim{}~\cite{airsim} is a project of Microsoft that serves as a plugin for Unreal Engine~\cite{unrealEngine} environments.
+It can simulate vehicles but its focus is the simulation of drones.
+The goal of \airsim{} is to collect annotated training data for deep learning or reinforcement learning based \glspl{ai} by controlling vehicles mostly manually.
+The available data includes only the state of vehicles, vision cameras and \gls{lidar} sensors.
+The generation of maps for \airsim{} is a complex task since it requires to generate Unreal Engine environments.\\
+\Gls{torcs}~\cite{torcs} is geared towards developing, testing and comparing \glspl{ai}.
+Many papers and research oriented competitions utilize \gls{torcs} because of its high degree of modularity of the architecture and its simple vehicle model which covers only basic properties of vehicle components and mechanical details, a simple aerodynamic model and friction.
+\Gls{torcs} provides a set of multiple predefined racing tracks and does not support generating new tracks.
+The implementation of \glspl{ai} for \gls{torcs} is complicated and requires \glspl{ai} to control cars comprehensively \eg{} to shift gears.\\
+Siemens PLM Software developed a X-in-the-loop driving simulation platform~\cite{xInTheLoop} which focuses on testing and validating \glspl{adas}.
+The X under test may be software, hardware or the model of an \gls{av} or even a human driver.
+The platform is based on \prescan{}, \matlab{} and \simulink{} which enables it to handle real-time models of \glspl{av} and their subsystems.
+Further the simulation platform provides tactile, motion, acoustic and visual feedback which enables a human to steer a car manually in real-time.\\
+\beamng{}~\cite{beamNG} is a simulator that uses in contrast to most other simulators a bottom up approach to model the physics of vehicles.
+Therefore instead of defining the physics of vehicles directly it specifies physics for all separate components of a vehicle \eg{} tires, suspensions, differentials, engines, doors and glass.
+A model of a vehicle is a collection of these components which are linked together with beams.
+So the physics of a vehicle is the result of the physics of all its components and their connections.
+Hence the physics of a vehicle has a very high level of detail and its behavior is very realistic.
+\beamng{} includes numerous models for vehicles, textures for road materials with different characteristics that influence the friction and weather conditions.
+There is a free but limited research version of \beamng{} which offers the full capacity of the physics engine but provides only one vehicle model and only one predefined environment.
+\beamngpy{} is a Python interface to dynamically create environments, to control \beamng{} simulations and to request data about vehicles and from their sensors.
+This work uses \beamng{} for all simulations.
+
+\subsection{Simulation Infrastructure and Platforms}
+To make a real car autonomous and to setup an environment to develop and test it is very time consuming, error prone and expensive.\\
+\autonomoose{}~\cite{autonomoose} is a research platform at the university of Waterloo which modifies a single car to increase its level of autonomy step by step.
+This car is equipped with radar, sonar, \gls{lidar}, inertial and vision sensors as well as a powerful embedded computer.
+This platform subsumes multiple research groups of multiple faculties.
+The current projects aim to improve the behavior in all-weather conditions, to optimize the fuel consumption, to reduce emissions and to provide methods to design safe and robust computer-based controls.\\
+\deepracer{}~\cite{deepracer} is a project on the \gls{aws} platform and focuses on \gls{rl}.
+Therefore it provides a software environment which allows to design, train, test and simulate \gls{rl} models.
+The project also offers a small \gls{av} which has a camera and is ready to accept and test trained \gls{rl} models in the real world.
+Additionally researchers can compete with each other researchers in a racing league which \gls{aws} hosts.\\
+Setting up simulations and interfaces for interacting with them is a complex task and not standardized.
+Existing simulators and architectural designs for simulation based testing are typically not freely available.
+Nevertheless, there are platforms like \metamoto{}~\cite{metamoto} that provide a simulation infrastructure to research groups in terms of a \gls{saas} to circumvent these problems.
+
+\subsection{Comprehensive Approaches}
+\paracosm{}~\cite{paracosm} is a project which specifies a \gls{dsl} to formalize test cases plus a simulation architecture.
+The \gls{dsl} is a synchronous reactive programming language whose main concept are reactive objects which bundle geometric and graphical features with the behavior over time of physical objects in a simulation.
+\paracosm{} uses 3D meshes to represent the geometric features of physical objects.
+Each reactive object defines input and output streams of data through which objects can communicate to each other and be composed to more complex objects in a flexible way.
+Hence the actual computations on or the analysis of data are equivalent to stream transformations over objects.
+\paracosm{} provides only a small set of sensor data which includes camera and depth images.
+To extend \paracosm{} with further types of sensor data it has to be extended using the underlying \gls{api}.
+\paracosm{} can also generate random test cases automatically.
+However, \paracosm{} does not provide any constructs for specifying test criteria.
+Additionally the internal representation is not compatible with any other well known simulator than the one \paracosm{} comes with.
+This shipped simulator lacks a precise reflection of physical behaviors in comparison to other simulators.
+The paper which presents \paracosm{} is not clear about how \glspl{ai} communicate with a simulator and there is no information about any performance measures.
+The paper is also not clear about whether simulator instances can run in parallel or whether the processes of the architecture can be distributed among multiple computers.\\
+The open source project \apollo{}~\cite{apollo} is a comprehensive platform which specifies a high performance and flexible architecture for the complete life cycle of developing, testing and deploying \glspl{av}.
+It ships with software components to localize traffic participants, to percept the environment and to plan routes plus it supports many types of sensors \eg{} \gls{lidar} sensors, cameras, radars and ultrasonic sensors.
+Additionally \apollo{} comes with a cloud service and offers a web application which visualizes the current output of relevant modules, shows the status of hardware components, offers debugging tools, activates or disables modules during a simulation and allows to control \glspl{av} manually.
+However \apollo{} does not provide test case criteria which consider complete scenarios or multiple traffic participants at once \eg{} distance between participants.\\
+\autoware{}~\cite{autoware, autowareOpen, autowareOnBoard} is another comprehensive open source project.
+Similar to \apollo{} it builds a complete ecosystem which implements algorithms for localization, perception, detection, prediction and planning, ships with predefined maps and has the capability to handle actual hardware including sensors and vehicles.
+It comes with the \gls{lgsvl} simulator that can visualize information like perception data or status of other participants.
+\autoware{} works with \gls{rosbag} files~\cite{rosbag} which allow to record, replay and debug executed simulations.
+The integration of \gls{rosbag} requires \autoware{} to describe environments with pixel clouds.
+Hence in order to work with \autoware{} a tester has to invest lots of time to create comprehensive pixel clouds.
+Furthermore a test has to rely on the shipped perception algorithm since this is the only source of information about the environment for every component.
+
+\subsection{Implementation of \texorpdfstring{\glspl{ai}}{AI}}
+To determine requirements of \glspl{ai} that control \glspl{av} in simulations this work considers multiple common approaches to implement \glspl{ai}.
+The two major paradigms to implement \glspl{ai} are mediated perception and behavior reflex.
+Mediated perception relies on camera images and tries to identify and classify objects as lanes, other participants, obstacles, \etc{}
+Based on the extracted information an \gls{ai} computes control commands for an \gls{av}.
+Behavior reflex relies on camera images as well but instead of extracting information from an image it directly maps the whole image to a driving action using a regressor like a \gls{cnn}.\\
+\Gls{dave}~\cite{dave} is a behavior reflex approach and relies on images of a single front camera.
+It uses a \gls{cnn} to compute steering commands directly from given input images.
+This \gls{cnn} uses camera images which are mapped to human steering angles as its training data.
+It learns to detect useful road features on its own and does not include any preprocessing steps for the camera images.
+The paper claims that this approach eventually leads to better performance and smaller systems because the internal components self-optimize.\\
+Another approach for implementing an \gls{ai} is \deepdriving{}~\cite{deepDriving}.
+\deepdriving{} is a direct perception approach which lies in between mediated perception and behavior reflex approaches.
+Unlike mediated perception it does not extract as much information as possible but uses only a small number of key perception indicators from an input image and estimates an affordance value of the situation at which the image was taken.
+The indicators include distances to lane markings and preceding participants.
+To extract the key perception indicators the approach uses deep \glspl{cnn} which are trained by manually driving an \gls{av} for a few hours.
+The paper claims that the set of key perception indicators is sufficient to completely describe scenes and to base driving decisions on it.\\
+Another approach is deep \gls{rl}~\cite{learnToDriveInADay}.
+This approach aims to train a neural network model that focuses solely on the lane keeping problem.
+Therefore it translates the problem of training a neural network into a problem of solving \glspl{mdp}.
+The input of the neural network are single monocular images and the distance the \gls{av} traveled safely defines the reward for the neural network.
+The approach determines the traveled distance by feature extraction of the input image.
+The paper claims that it uses a continues and model-free algorithm which can perform all exploration and optimizations on the \gls{av} while it drives.
+Further it claims that an \gls{av} learns to follow a lane with only a few steps of training.\\
+\scaleai{}~\cite{scaleAI} is a company which offers training data for \glspl{av} to companies including Samsung, Toyota and lyft.
+It offers data as images and videos.
+The types of available data are \gls{lidar} sensors, radar, point clouds, traffic lights plus annotated and labeled data.
+The data can be requested via a \gls{rest} \gls{api}.
+This \gls{api} also offers \gls{ml} based methods to label and annotate custom images and videos.

@@ -1,0 +1,39 @@
+%!TEX root = ../thesis.tex
+\section{Background}\label{sec:background}
+A common execution strategy for simulations is \textbf{synchronous simulation}.
+This strategy avoids simulations to be influenced by network latency and the current load of the underlying hardware.
+As a drawback this strategy does not support real-time simulations.\\
+This strategy makes a simulation process wait frequently for \gls{ai} processes which control \glspl{av} in the simulation to reach a certain state.
+Only if the \gls{ai} processes reach this state both the simulation process and the \gls{ai} processes continue.\par
+
+Since synchronous simulation makes simulations pause frequently the real time does not correspond to their simulated time.
+Further is the speed of the simulated time dependent on the current load of the underlying hardware.
+To solve this the simulation time is separated from the real time by using \textbf{Ticks}~\cite{tickrate}.
+Ticks define logical time units~\cite{logicalTime} on which both simulations and test cases in my work are based on.
+A single tick is a time interval of predefined length in which a simulator calculates the changes to the environment plus to all traffic participants and applies them to the simulation.
+A tick is the smallest considered logical time unit and can not be divided.\par
+
+The \textbf{three-way handshake}~\cite{computernetzwerke} is a communication protocol that allows to establish a connection between a client and a server on an unreliable channel.
+Therefore the initiating client sends a \code{SYN} (\enquote{synchronize}) package to the server to request a connection.
+The server responds with a \code{SYN-ACK} (\enquote{\code{SYN} acknowledge}) package that informs the client that the server opened a connection.
+The client answers this package again with a \code{ACK} (\enquote{acknowledge}) package which confirms that the client knows about the opened connection.
+This establishes a connection.\\
+The most well-known application is \gls{tcp} which extends the protocol with additional properties including error detection.
+\Gls{tcp} builds the basis of \gls{http} requests.
+Nevertheless, a three-way handshake is suitable to implement simple request mechanisms to exchange data on unreliable channels.\par
+
+\textbf{Micro services} is an architectural design pattern which splits an application into small and autonomous services and connects them with light weight protocols~\cite{microservices}.
+In contrast to other architectural design patterns like \gls{soa} micro services introduce a very high level of resilience, the possibility to scale services independently instead of the whole application and easier composition of heterogeneous technologies.
+As a drawback micro services increase the complexity of the development and the deployment of an application.
+Further it requires more communication between its components which the application more dependent on network latencies.\par
+
+Complex objects can often not be stored or transfered over a network as they are.
+\textbf{Serialization} is a technique to convert a complex object to a textual or binary representation and back~\cite{serialization}.
+These textual or binary representations can be stored or transfered over a network.
+Further serialization may implement additional properties which allow to check whether a serialized object is broken \eg{} after transferring it over an unreliable connection.\par
+
+The \textbf{master slave pattern} is a communication model which allows to distribute similar or identical computations over multiple nodes and parallelize them~\cite{masterSlave}.
+The pattern consists of a number of slave nodes that do the actual computations and exactly one master node that distributes tasks among the slave nodes, organizes them and collects their results.
+On the one hand this architecture is simple and introduces tolerance for faults of computations on slave nodes.
+On the other hand it also introduces the master node as single point of failure.
+Further this architecture does not allow direct communication between slave nodes without involving the master node which increases the required communication in case the slave nodes need to exchange data.

@@ -1,0 +1,13 @@
+%!TEX root = ../proposal.tex
+\section{Introduction and Motivation}
+The progress in developing \glsfirstplural{av} over the past years is impressive.
+The effort taken for testing them is amazing \eg{} cars of Waymo drove over 10 million miles on public roads and over 7 billion miles within simulations~\cite{waymoMillions}.
+However, this is according to~\cite{millions} not enough for assuring a high reliability on the safety of \glspl{av}.
+Hence much more miles have to be driven autonomously.
+As~\cite{waymoMillions} suggests simulations are preferred over tests on public roads.
+Using simulations instead of tests on public streets reduces the possibility of accidents and injuries, vastly reduces the costs of testing, allows to test cars in predefined situations and enables testers to reproduce test results and faulty behaviors.
+However, the setup for simulations and the preparation of test cases is tedious and error prone and concerning the definition of test cases itself there is currently no well known scheme of abstractly specifying test criteria in the context of \glspl{av}.
+Furthermore there is at the moment no tool that provides an abstract interface for testing and training self driving cars as well as for supporting test generation.\\
+I present \drivebuild{}, a research toolkit that automates the process of setting up simulations, executing tests in parallel, distributing them over a collection of computers, verifying test criteria during simulation time and collecting test results.
+\drivebuild{} reduces the amount of effort for testing \glspl{av}, avoids dealing manually with error prone tasks and comes with an abstract scheme for formalizing test cases.\\
+The proposal is organized as follows: \autoref{sec:problem} provides a detailed problem statement followed by \autoref{sec:sota} discussing current and related approaches and \autoref{sec:proposedMethod} describing the proposed method of this work.

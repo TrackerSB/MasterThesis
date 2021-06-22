@@ -1,0 +1,47 @@
+\plainFrame{%
+    \centering
+    \begin{tikzpicture}[%
+            ->,
+            >=stealth
+        ]
+        \node (client) {\includegraphics[width=.125\linewidth]{media/computer_client.png}};
+        \node[right=1.5 of client] (microService) {\includegraphics[width=.125\linewidth]{media/virtualMachine_microService.png}};
+        \draw
+            (client) edge (microService)
+            (microService) edge (client);
+        \node[right=1.5 of microService] (windows2) {\includegraphics[width=.0625\linewidth]{media/virtualMachine_windows.png}};
+        \node[above=0.5 of windows2] (windows1) {\includegraphics[width=.0625\linewidth]{media/virtualMachine_windows.png}};
+        \node[below=0.25 of windows2] (dots) {\vdots};
+        \node[below=0.25 of dots] (windows3) {\includegraphics[width=.0625\linewidth]{media/virtualMachine_windows.png}};
+        \draw
+            (microService) edge (windows1)
+            (windows1) edge (microService)
+            (microService) edge (windows2)
+            (windows2) edge (microService)
+            (microService) edge (windows3)
+            (windows3) edge (microService);
+        \node[above=of client] (ai1) {\includegraphics[width=.125\linewidth]{media/img_535483.png}};
+        \node[below=of client] (ai2) {\includegraphics[width=.125\linewidth]{media/img_535483.png}};
+        \draw
+            (client) edge (ai1)
+            (client) edge (ai2);
+        \draw
+            (ai1) edge (microService)
+            (microService) edge (ai1)
+            (ai2) edge (microService)
+            (microService) edge (ai2);
+        \node[right=1.5 of windows2] (dbms) {\includegraphics[width=.0625\linewidth]{media/dbms.png}};
+
+        \draw
+            (dbms) edge (windows1)
+            (windows1) edge (dbms)
+            (dbms) edge (windows2)
+            (windows2) edge (dbms)
+            (dbms) edge (windows3)
+            (windows3) edge (dbms)
+            (microService) edge[bend left=70] (dbms) % FIXME These two edges needed?
+            (dbms) edge[bend right=70] (microService);
+    \end{tikzpicture}
+    \subsectionBox{colorExecute!40}
+}
+

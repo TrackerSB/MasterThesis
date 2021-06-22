@@ -1,0 +1,49 @@
+%!TEX root = ../proposal.tex
+\section{Schedule}
+% The schedule should sum up to 6 months including the time to write the document
+% This period is more or less 26/27 weeks.
+
+% Mention the Starting date and the Expected Completion date
+
+% Please check the "booktabs" latex package manual at http://ftp.fernuni-hagen.de/ftp-dir/pub/mirrors/www.ctan.org/macros/latex/contrib/booktabs/booktabs.pdf
+
+The thesis is limited to a maximum time period of 6 months.
+Starting at the 13th of May this results in 26 weeks ending on 10th of November.
+Since \drivebuild{} is used during the seminar the schedule has to consider the progress of the seminar and requires to result in a working implementation until half of the semester.
+The schedule in \autoref{table:schedule} divides into three milestones.
+The first milestone contains the collection of requirements and the actual implementation of \drivebuild{}.
+In the second milestone I will collect data about the executed tests, conduct my qualitative study and evaluate my work.
+In the third milestone I will write the actual thesis.
+
+\begin{table}[h!tp]
+\centering
+\caption{%
+    Thesis Schedule --- Contains all main tasks of my work, how long they presumably take and how these are grouped into milestones.
+}
+\medskip
+\begin{tabularx}{\linewidth}{c X}
+\toprule
+\bfseries Weeks   & \bfseries Task\\
+\midrule
+1                 & Specify formalization schemes and \gls{ai} communication protocol\\
+1                 & Implement Generator, KPTransformer and Transformer\\
+2                 & Implement SimController with runtime verification\\
+3                 & Implement Communicator and TCManager\\
+Milestone M1      & ``Ready to go''\\
+\midrule
+4                 & Implement collection of data and StatsManager\\
+5 --- 12          & Conduct and document qualitative study, collect data for quantitative analysis and provide support and bugfixes\\
+End of semester\\
+13 --- 16         & Analyze qualitative study\\
+17                & Conduct quantitative analysis\\
+Milestone M2      & ``Final countdown''\\
+\midrule
+18 --- 24         & Refine and finalize thesis\\
+25 --- 26         & Contingency time of 2 weeks\\
+Milestone M3      & ``Final destiny''\\
+\bottomrule
+\end{tabularx}\label{table:schedule}
+\end{table}
+
+After the 26th week there are 2 days left until the available time is fully used.
+These are planned to print the thesis and hand it in.

@@ -1,0 +1,15 @@
+<xPosition participant="<someParticipantID>" x="<x>" y="<y>"
+    tolerance="<tolerance>"/>
+<xArea participant="<someParticipantID>"
+    points="(<x1>,<y1>);(<x2>,<y2>);[...];(<xn>,<yn>)"/>
+<xLane participant="<someParticipantID>"
+    onLane="<someLaneIdOrOffroad>"/>
+<xSpeed participant="<someParticipantID>" limit="<limit>"/>
+<xDamage participant="<someParticipantID>"/>
+<vcTime from="<fromTick>" to="<toTick>"/>
+<xDistance participant="<someParticipantID>" to="<someParticipantID>"
+    max="<maxDistance>"/>
+<vcTTC participant="<someParticipantID>" to="<someParticipantID>"
+    max="<maxTime>"/>
+<xLight participant="<someParticipantID>" turnedOn="<lightName>"/>
+<xWaypoint participant="<someParticipantID>" waypoint="<waypointID>"/>

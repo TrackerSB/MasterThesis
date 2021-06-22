@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<criteria xmlns="http://drivebuild.com"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://drivebuild.com drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <version>1</version>
+    <name>Scalability Test</name>
+    <environment>scalability.dbe.xml</environment>
+    <stepsPerSecond>10</stepsPerSecond>
+    <aiFrequency>5</aiFrequency>
+
+    <participants>
+        <participant id="ego" model="ETK800">
+            <initialState x="-101.79947601137711" y="-79.78281825433673" movementMode="_BEAMNG"
+                          orientation="37.2"/>
+            <movement>
+                
+                
+                    <waypoint x="112.34648950562129" y="45.62123708703425" movementMode="_BEAMNG" tolerance="1"/>
+                
+            </movement>
+        </participant>
+    </participants>
+
+    <success>
+        <scPosition participant="ego" x="112.34648950562129" y="45.62123708703425" tolerance="4.0"/>
+    </success>
+
+    <failure>
+        <or>
+            <scDamage participant="ego"/>
+            <scLane participant="ego" onLane="offroad"/>
+        </or>
+    </failure>
+</criteria>

@@ -1,0 +1,17 @@
+%!TEX root = ../thesis.tex
+\section{Conclusions}
+% Based on https://www.scribbr.com/dissertation/write-conclusion/
+In this work I developed a distributed system which automates simulation-based testing of \glspl{av}.
+Therefore it presents a formalization of test cases and explains all relevant strategies to generate simulations, handle simulator instances, evaluate test criteria during simulation executions, distribute simulation executions over a cluster and implement the communication between the components of \drivebuild{} and clients.
+Its evaluation works with students as users of \drivebuild{} and utilizes their implementations of test generators and \glspl{ai}.
+It showed that \drivebuild{} is able to cope with all these various approaches.
+Further \drivebuild{} provides all metrics that either the implementations require to operate or the evaluation requires to analyze them.
+Since the number of available test generators and \glspl{ai} is low and the quality of some of them is not as good as expected the metrics to analyze them yielded not as much interesting information as they could.
+So future evaluation should consider even more test generators and \glspl{ai} (\eg{} \gls{dave}~\cite{dave}).
+The evaluation also illustrates that \drivebuild{} is able to distribute test executions among a cluster and handle simulations and \glspl{av} in parallel.
+Further it reveals that the performance when running \glspl{simnode} in \glspl{vm} on a shared cluster is very bad.
+Research on the causes that affect the performance issues requires much more test executions and dedicated hardware resources.
+Based on the experience which the evaluation yields possible causes may be low reliability of the low level socket communication or the fact that the hardware is virtualized.\\
+However, there are already seminar courses at the university of Passau which use \drivebuild{} to test \glspl{ai}.
+Further there is an ongoing discussion with researchers at the \enquote{Université du Québec à Chicoutimi, Canada} about integrating their event stream processing into \drivebuild{} to implement runtime verification and real-time monitoring.
+Also at the \gls{zhaw} there is a thesis about testing \glspl{av} which utilizes \drivebuild{}.

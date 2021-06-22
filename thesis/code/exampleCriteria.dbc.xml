@@ -1,0 +1,9 @@
+<!-- FIXME Check whether these are all implemented -->
+<xArea participant="<someParticipantID>" points="(<x1>,<y1>);(<x2>,<y2>);[...];(<xn>,<yn>)"/>
+<xDamage participant="<someParticipantID>"/>
+<xDistance participant="<someParticipantID>" to="<someParticipantID>" max="<maxDistance>"/>
+<xLane participant="<someParticipantID>" onLane="<someLaneIdOrOffroad>"/>
+<xPosition participant="<someParticipantID>" x="<x>" y="<y>" tolerance="<tolerance>"/>
+<xSpeed participant="<someParticipantID>" limit="<limit>"/>
+<vcTime from="<fromTick>" to="<toTick>"/>
+<vcTTC participant="<someParticipantID>" to="<someParticipantID>" max="<maxTime>"/>

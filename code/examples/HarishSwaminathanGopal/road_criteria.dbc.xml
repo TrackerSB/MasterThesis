@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<criteria xmlns="http://drivebuild.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://drivebuild.com ../drivebuild.xsd">
+    <author>Harish</author>
+    <version>1</version>
+    <name>LaneTest</name>
+    <environment>updated_road.dbe.xml</environment>
+    <stepsPerSecond>10</stepsPerSecond>
+    <!--
+     Defines in how many steps the simulation divides each second 
+    -->
+    <aiFrequency>50</aiFrequency>
+    <!--
+     Defines how many steps to simulate before requesting AIs and cars in TRAINING mode 
+    -->
+    <participants>
+        <participant id="ego" model="ETK800">
+            <!--  Definition of a participant  -->
+            <initialState x="0" y="0" movementMode="AUTONOMOUS" orientation="90"/>
+            <!--
+             Initial position, orientation and movement mode of the participant 
+            -->
+            <ai>
+                <!--
+                 Definition of which data the simulation shall provide about this participant 
+                -->
+                <position id="egoPosition"/>
+                <speed id="egoSpeed"/>
+                <steeringAngle id="egoSteeringAngle"/>
+                <camera id="egoFrontCamera" width="800" height="600" fov="60" direction="FRONT"/>
+                <lidar id="egoLidar" radius="200"/>
+                <laneCenterDistance id="egoLaneDist"/>
+                <!--
+                 Distance of the car to the center of nearest lane (i.e. the lane currently driving on) 
+                -->
+            </ai>
+            <movement>
+                <!--  Definition of the movement of this participant  -->
+                <waypoint x="0" y="0" movementMode="AUTONOMOUS" tolerance="1"/>
+                <waypoint x="60" y="20" movementMode="AUTONOMOUS" tolerance="3"/>
+            </movement>
+        </participant>
+    </participants>
+    <!--  If these criteria are met the test is skipped  -->
+    <!--
+    <precondition>
+            <success>
+                    <scDamage participant="ego" >
+                    <scLane participant="ego" onLane="egoLaneDist" orientation="90">
+                    </success>
+    </precondition>
+    -->
+    <success>
+        <!--
+         If these criteria are met the test is considered successful 
+        -->
+        <or>
+            <scArea participant="ego" points="(33,15);(60,20);(30,15);(75,25);(105,30);(5,50)"/>
+            <scLane participant="ego" onLane="egoLaneDist-2"/>
+            <scLane participant="ego" onLane="egoLaneDist+2"/>
+        </or>
+    </success>
+    <failure>
+        <!--
+         If these criteria are met the test is considered failed 
+        -->
+        <or>
+            <scDamage participant="ego"/>
+            <scLane participant="ego" onLane="offroad"/>
+        </or>
+    </failure>
+</criteria>

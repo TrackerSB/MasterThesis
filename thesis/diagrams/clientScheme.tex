@@ -1,0 +1,27 @@
+%!TEX root = ../thesis.tex
+\begin{sequencediagram}
+    \newthread{client}{:Client}
+    \tikzstyle{inststyle}+=[below right=-0.82cm and 5cm of client]  % FIXME Workaround for newthread distance
+    \newthread{drivebuild}{:\glstext{mainapp}}
+    \begin{call}{client}{/runTests}{drivebuild}{SubmissionResult}
+    \end{call}
+    \begin{sdblock}{\mltn{For each \gls{av}\\in parallel}}{While simulation runs}
+        \postlevel%
+        \begin{call}{client}{/ai/waitForSimulatorRequest}{drivebuild}{SimStateResponse}
+            \begin{callself}{drivebuild}{requestAiFor}{}
+            \end{callself}
+            \postlevel%
+        \end{call}
+        \prelevel\prelevel%
+        \begin{callself}{drivebuild}{Wait for control}{\mltn{Apply control\\commands}}
+            \postlevel%
+            \begin{call}{client}{/ai/requestData}{drivebuild}{DataResponse}
+            \end{call}
+            \begin{callself}{client}{Calculate control commands}{}
+                \postlevel%
+            \end{callself}
+            \begin{call}{client}{/ai/control}{drivebuild}{Void}
+            \end{call}
+        \end{callself}
+    \end{sdblock}
+\end{sequencediagram}

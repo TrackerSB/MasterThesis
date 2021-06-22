@@ -1,0 +1,108 @@
+\documentclass[10pt,a4paper, final]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[a4paper]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+
+\usepackage{graphicx}
+
+\usepackage{standalone}
+\usepackage{datetime}
+
+\usepackage[defernumbers=true]{biblatex}
+\usepackage[acronym,automake,toc]{glossaries}
+\usepackage{pifont}
+\usepackage{hyperref}
+\usepackage{listings}
+%\usepackage{refcheck}
+\usepackage{smartdiagram}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{xspace}
+
+\newcommand{\draft}[1]{\textit{\textcolor{red}{#1}}}
+
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+\lstdefinestyle{text}{%
+    basicstyle=\color{forestgreen}\ttfamily
+}
+\lstdefinelanguage{XML}{%
+    morestring=[b]",
+    stringstyle=\color{black},
+    identifierstyle=\color{blue},
+    keywordstyle=\color{cyan},
+    morekeywords={x,y,width,height,baseRadius,id,model,direction,fov,movementMode,tolerance,radius,orientation,length,participant,onLane,points,to,max,limit,from,turnedOn,waypoint}
+}
+
+% tikz
+\usetikzlibrary{backgrounds,fit,graphs,positioning,shapes}
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfdeclarelayer{smart diagram arrow back}
+\pgfsetlayers{back,main,front,smart diagram arrow back}
+\makeatletter
+\pgfkeys{%
+  /tikz/zlayer/.code={%
+    \gdef\node@@on@layer{%
+      \setbox\tikz@tempbox=\hbox\bgroup\pgfonlayer{#1}\unhbox\tikz@tempbox\endpgfonlayer\egroup}
+    \aftergroup\node@on@layer%
+  },
+  /tikz/end zlayer/.code={%
+    \endpgfonlayer\endgroup\endgroup%
+  }
+}
+\def\node@on@layer{\aftergroup\node@@on@layer}
+\makeatother
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3ex plus 2ex minus 2ex}
+
+\input{commands}
+
+% biblatex
+\addbibresource{biblio.bib}
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+\nocite{*} % This shows the entire content of the biblio.bib file, please comment this before the final submission
+
+\makeglossaries%
+\loadglsentries{acronyms.tex}
+
+\begin{document}
+    % Title page
+    \input{title.tex}
+
+    % Abstract page
+    \pagestyle{empty}
+    \include{sections/abstract}
+
+    \pagestyle{plain}
+
+    \input{sections/introduction}
+    \input{sections/problemStatement}
+    \input{sections/backgroundAndSota}
+    \input{sections/proposedMethod}
+    \input{sections/plannedEvaluation}
+    \input{sections/schedule}
+    \input{sections/criteria}
+
+    \pagebreak
+
+    \section{References}
+    \begingroup
+    \renewcommand{\section}[2]{}%
+    \printbibliography[category=cited]
+    \endgroup
+
+%    \section{Not cited}
+%    \begingroup
+%    \renewcommand{\section}[2]{}%
+%    \printbibliography[notcategory=cited]
+%    \endgroup
+\end{document}

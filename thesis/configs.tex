@@ -1,0 +1,77 @@
+% Configure tikz
+\usetikzlibrary{backgrounds,fit,graphs,positioning,shapes}
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfdeclarelayer{smart diagram arrow back}
+\pgfsetlayers{back,main,front,smart diagram arrow back}
+\makeatletter
+\pgfkeys{%
+  /tikz/zlayer/.code={%
+    \gdef\node@@on@layer{%
+      \setbox\tikz@tempbox=\hbox\bgroup\pgfonlayer{#1}\unhbox\tikz@tempbox\endpgfonlayer\egroup}
+    \aftergroup\node@on@layer% chktex
+  },
+  /tikz/end zlayer/.code={%
+    \endpgfonlayer\endgroup\endgroup%
+  }
+}
+\def\node@on@layer{\aftergroup\node@@on@layer}
+\makeatother
+
+% Custom units
+\DeclareSIUnit{\million}{million}
+\DeclareSIUnit{\billion}{billion}
+\DeclareSIUnit{\mile}{miles}
+
+% Define custom colors
+\definecolor{clusterClient}{rgb}{0.8, 0.8, 1}
+\definecolor{clusterMicroService}{rgb}{1, 0.9, 0.8}
+\definecolor{clusterDbms}{rgb}{1, 0.98, 0.6}
+\definecolor{clusterSimNode}{rgb}{0.8, 1, 0.8}
+
+% Configure minted
+\setminted{
+    autogobble,
+    breaklines=true
+}
+
+% Configure caption of listings
+\makeatletter
+\@ifpackageloaded{babel}%
+    {%
+        \addto\extrasbritish{%
+            \providecommand*{\listingsautorefname}{Listing}%
+            \providecommand*{\listingsname}{Listing}%
+        }%
+        % Fix to getting autorefs for subfigures right (thanks to Belinda Vogt for changing the definition)
+    }{\relax}
+\makeatother
+
+% Configure tikz ER diagrams
+\tikzset{%
+    every entity/.style = {%
+        top color=white,
+        bottom color=blue!30,
+        draw=blue!50!black!100,
+        drop shadow
+    },
+    every attribute/.style = {%
+        top color=white,
+        bottom color=yellow!20,
+        draw=yellow,
+        drop shadow
+    },
+    every relationship/.style = {%
+        top color=white,
+        bottom color=red!20,
+        draw=red!50!black!100,
+        drop shadow
+    },
+    every edg/.style = {link},
+    every isa/.style = {%
+        top color=white,
+        bottom color=green!20,
+        draw=green!50!black!100,
+        drop shadow
+    }
+}

@@ -1,0 +1,13 @@
+\begin{sequencediagram}
+    \newthread{a}{:A}
+    \tikzstyle{inststyle}+=[below right=-0.82cm and 5cm of a]  % FIXME Workaround for newthread distance
+    \newthread{b}{:B}
+    \begin{callself}{b}{Wait for complete message}{}
+        \mess{a}{action}{b}
+        \mess{a}{number of params N}{b}
+        \mess[1]{a}{parameters 1 to N}{b}
+    \end{callself}
+    \begin{callself}{a}{Wait for complete message}{}
+        \mess{b}{result}{a}
+    \end{callself}
+\end{sequencediagram}

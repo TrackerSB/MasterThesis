@@ -1,0 +1,71 @@
+%!TEX root = ../thesis.tex
+\section{Problem Statement}\label{sec:problemStatement}
+% Definition test case
+In this work a test case is a specification of an environment and a test setup.
+The environment describes the curvatures of roads and the placements of static obstacles.
+The test setup describes the initial states of vehicles and the test criteria.
+% There are too many test cases to formalize
+The resulting number of possible test cases is too huge to create a systematic way to define test cases \ie{} a formalization that allows to describe arbitrary test cases without loosing the level of detail which is required to specify concrete test cases.
+So a formalization that is supposed to define concrete test cases can only treat a subset of the whole test case space.
+% There is no standardized subset
+Currently there is no standardized subset which specifies a comprehensive but sufficient test suite that ensures the safety of \glspl{av} to a high degree.\par
+
+% There are too many ADASs to test
+Concerning a subset of test cases which explicitly target safety critical \glspl{adas} \eg{} \gls{acc}, lane centering, emergency brake or collision avoidance the number of possible test cases is still too large for a formalization.
+A simple option is to reduce the subset to a number of certain \glspl{adas}.
+This reduces the generality of the formalization and raises the problem of reasoning about which \glspl{adas} should be supported.
+Another option is to subsume \glspl{adas} into groups.
+This raises the problem of determining shared characteristics of \glspl{adas} that separate \glspl{adas}.
+Again if the number of groups is too large a formalization can not handle all of them and if it is too low a formalization may not be able to express all the specific details which are needed to specify concrete test cases.\\
+% Testing an ADAS is complex
+Testing an \gls{adas} is complex.
+% There are no standards
+Each \gls{adas} requires certain input metrics to operate \eg{} current positions, distances or speeds of the \gls{av} to which the \gls{adas} is attached to or of other participants.
+There are no standards to define which metrics \glspl{adas} require and how they have to be tested.
+% Increasing number of metrics and data
+Further input metrics may be properties about the \gls{av} like damage, steering angle or the state of certain electronic components \eg{} the headlight.
+Depending on the implementation of an \gls{adas} it may not require certain metrics as its input directly but other data like camera images or \gls{lidar} data which further increases the variety of input metrics.
+In order to test the results of \glspl{adas} even further metrics that \eg{} represent a ground truth are required.
+This yields the problem that a formalization has to support many different kinds of metrics in order to provide \glspl{adas} with input metrics and to test them.
+The more metrics a formalization supports the more complex it may get.\par
+
+\Glspl{av} under test are controlled by \glspl{ai}.
+% Testing the efficiency of an AI is hard
+Concerning a subset of test cases which evaluate the efficiency of a given \gls{ai} the problem raises that the execution time of the frequent verification of test criteria, the overhead of the underlying simulator and the discrepancy between the hardware used for testing and the actual hardware used with a real \gls{av} falsify time measurements.
+% An external AI needs communication
+Given all the metrics which an \gls{adas} that is attached to an \gls{av} requires a simulation needs to exchange these possibly highly diverse metrics with the \gls{ai} that controls the \glspl{av}.
+Since \glspl{ai} differ greatly in their implementation they can not be included in the simulation directly and have to run separately.
+Additionally a tester may not want to expose the implementation of an \gls{ai} to \drivebuild{}.
+Hence \glspl{ai} have to run externally \ie{} not within the internal architecture of \drivebuild{}.
+% Network latency influences the results of external AI
+In case of an external \gls{ai} the communication with a simulation and the network latency further falsify time measurements.
+% Communication scheme required
+In case of external \glspl{ai} there is also the problem of creating a communication scheme which allows to request and exchange lots of diverse data and which exposes mechanisms to implement interactions between \glspl{ai} and a simulation.\par
+
+% Extending the range of supported test cases complicates the validation and evaluation of criteria
+The more subsets a formalization has to consider and the bigger they are the higher is the diversity of metrics as well as test criteria which are required to define test cases.
+This results in the problem of an increasing complexity in the definition of test cases plus in the validation and evaluation of test criteria.
+% There are no standardized test criteria
+There is no standardized set of test criteria which are sufficient for many test cases.
+There is also no standardized way of how to declare test criteria and how to specify reference tests and their expected results~\cite{noStandard}.
+% Extensibility of test criteria
+Testing \glspl{adas} that are not explicitly considered during the creation of the formalization may need test criteria which the formalization does not provide.
+To allow an user to introduce additional criteria on the client side for the purpose of introducing further criteria leads to the problem of distributing test criteria over the underlying platform and the user and thus divides the corresponding responsibilities of the verification of test criteria.\par
+
+% AIs require training data
+However, any subset of test cases involves \glspl{ai} which control \glspl{av}.
+These \glspl{ai} have to be trained before they are able to control an \gls{av} suitably.
+Therefore a tester wants to use training data which is collected in the same environment that is in place to run tests for an \gls{ai}.
+This yields the problem of manually controlling participants in a simulation to efficiently generate training data.\par
+
+% Efficient execution of large quantities requires parallelism
+In order to ensure a high degree of safety of \glspl{ai} many test executions are required.
+In order to execute many tests simultaneously they may be distributed over a cluster.
+% Distributing tests requires prediction of load
+When distributing test runs across a cluster a common goal is high utilization of its provided resources.
+This leads to the problem of finding a strategy to distribute test executions based on their predicted load and their estimated execution time.
+Therefore characteristics of formalized test cases have to be determined that deposit in the resulting load and the actual execution time.\par
+
+% Goals of this work
+The goals of this work are the creation of a scheme which formalizes test cases, the support of training \glspl{ai}, the specification of a life cycle for handling the execution of tests and the actual implementation of \drivebuild{}.
+The formalization shall focus on \glspl{adas} and be able to describe static elements (\eg{} roads and obstacles), dynamic elements (\eg{} participants and their movements), test criteria and sensor data which \glspl{ai} require.

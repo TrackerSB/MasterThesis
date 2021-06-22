@@ -1,0 +1,31 @@
+%!TEX root = ../thesis.tex
+\begin{tabularx}{.6\linewidth}{X c c c c}
+    \toprule
+    \bfseries Feature                          & \bfseries G0 & \bfseries G1 & \bfseries G2 & \bfseries G3         \\
+    \midrule
+    \multicolumn{5}{c}{Scenario Elements}                                                                          \\
+    Multiple participants                      &              & \checkmark{} &              &                      \\
+    Obstacles                                  &              &              & \checkmark{} &                      \\
+    Multiple roads                             &              & \checkmark{} &              &                      \\
+    Intersections                              & \~{}         & \checkmark{} & \~{}         & \~{}                 \\
+    \midrule
+    \multicolumn{5}{c}{Test Configuration}                                                                         \\
+    Road markings                              & \checkmark{} & \checkmark{} & \checkmark{} & \checkmark{}         \\
+    Speed limits                               &              &              &              &                      \\
+    Target speeds                              &              &              &              &                      \\
+    \midrule
+                                               & \bfseries A0 & \bfseries A1 & \bfseries A2 & \bfseries Evaluation \\
+    \midrule
+    \multicolumn{5}{c}{Data Requests}                                                                              \\
+    Camera images                              &              & \checkmark{} & \checkmark{} &                      \\
+    Speed                                      &              &              & \checkmark{} &                      \\
+    Position                                   &              &              &              & \checkmark{}         \\
+    Bounding box                               &              &              &              & \checkmark{}         \\
+    \midrule
+    \multicolumn{5}{c}{Criteria}                                                                                   \\
+    Damage detection                           &              &              &              & \checkmark{}         \\
+    Off-road detection                         &              &              &              & \checkmark{}         \\
+    Goal area detection                        &              &              &              & \checkmark{}         \\
+    \Glstext{vc}                               &              &              &              &                      \\
+    \bottomrule
+\end{tabularx}

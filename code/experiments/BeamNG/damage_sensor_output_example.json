@@ -1,0 +1,140 @@
+{
+  "lowpressure": "False",
+  "damageExt": 14500,
+  "type": "Damage",
+  "damage": 28634.64453125,
+  "deformGroupDamage": {
+    "windshield_break": {
+      "maxEvents": 5109.999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.00019569471624266148
+    },
+    "radtube_break": {
+      "maxEvents": 599.9999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.001666666666666667
+    },
+    "doorglass_RR_break": {
+      "maxEvents": 639.9999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0015625000000000003
+    },
+    "sideglass_L_break": {
+      "maxEvents": 666.6666666666666,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0015
+    },
+    "taillightglass_L_break": {
+      "maxEvents": 539.9999999999999,
+      "damage": 0.0074074074074074086,
+      "eventCount": 4,
+      "invMaxEvents": 0.0018518518518518521
+    },
+    "radiator_damage": {
+      "maxEvents": 2799.9999999999995,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0003571428571428572
+    },
+    "driveshaft": {
+      "maxEvents": 99.99999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.010000000000000002
+    },
+    "doorglass_FR_break": {
+      "maxEvents": 659.9999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0015151515151515154
+    },
+    "doorglass_FL_break": {
+      "maxEvents": 659.9999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0015151515151515154
+    },
+    "fendersignal_R_break": {
+      "maxEvents": 1299.9999999999998,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0007692307692307693
+    },
+    "headlightglass_L_break": {
+      "maxEvents": 439.99999999999994,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.002272727272727273
+    },
+    "headlightglass_R_break": {
+      "maxEvents": 439.99999999999994,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.002272727272727273
+    },
+    "fendersignal_L_break": {
+      "maxEvents": 1299.9999999999998,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0007692307692307693
+    },
+    "taillightglass_R_break": {
+      "maxEvents": 539.9999999999999,
+      "damage": 0.0074074074074074086,
+      "eventCount": 4,
+      "invMaxEvents": 0.0018518518518518521
+    },
+    "foglightglass_R_break": {
+      "maxEvents": 999.9999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.001
+    },
+    "tailgatelight_L_break": {
+      "maxEvents": 439.99999999999994,
+      "damage": 0.002272727272727273,
+      "eventCount": 1,
+      "invMaxEvents": 0.002272727272727273
+    },
+    "sideglass_R_break": {
+      "maxEvents": 666.6666666666666,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0015
+    },
+    "tailgatelight_R_break": {
+      "maxEvents": 439.99999999999994,
+      "damage": 0.002272727272727273,
+      "eventCount": 1,
+      "invMaxEvents": 0.002272727272727273
+    },
+    "sunroof_break": {
+      "maxEvents": 813.3333333333334,
+      "damage": 0.0012295081967213114,
+      "eventCount": 1,
+      "invMaxEvents": 0.0012295081967213114
+    },
+    "doorglass_RL_break": {
+      "maxEvents": 639.9999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.0015625000000000003
+    },
+    "foglightglass_L_break": {
+      "maxEvents": 999.9999999999999,
+      "damage": 0,
+      "eventCount": 0,
+      "invMaxEvents": 0.001
+    },
+    "tailgateglass_break": {
+      "maxEvents": 899.9999999999999,
+      "damage": 0.006666666666666668,
+      "eventCount": 6,
+      "invMaxEvents": 0.0011111111111111113
+    }
+  }
+}

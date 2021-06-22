@@ -1,0 +1,13 @@
+Describe API for AIs
+
+Describe whats possible for developer
+Whats missing?
+
+Assign user ID and password for each user
+
+What do I need for developing an AI?
+Additional criteria
+
+Things that I did not relize?
+
+Tell synchronization scheme

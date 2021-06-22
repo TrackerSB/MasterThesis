@@ -1,0 +1,30 @@
+%!TEX root = ../thesis.tex
+\def\tabularxcolumn#1{m{#1}}
+\begin{tabularx}{\linewidth}{c l X}
+    \toprule
+    \bfseries Group & \bfseries Supported \glspl{adas} & \bfseries Description \\
+    \midrule
+    1 & \makecell[l]{%
+        Collision avoidance system\\
+        Forward Collision Warning\\
+        Emergency Brake Assist\\
+        Intersection assistant\\
+        Turning assistant
+    } & Systems that avoid or reduce the severity of collisions or at least warn a driver about them\\
+    \midrule
+    2 & \makecell[l]{%
+        Intelligent speed adaptation\\
+        Cruise control\\
+        Adaptive cruise control\\
+        Active Brake Assist
+    } & Systems that control the speed of an \gls{av} or keep a safe distance to other participants\\
+    \midrule
+    3 & \makecell[l]{%
+        Lane centering\\
+        Lane departure warning system\\
+        Lane change assistance\\
+        Wrong-way driving warning
+    } & Systems that observe the relative position of an \gls{av} on a lane or determine the direction of a lane.\\
+    \bottomrule
+\end{tabularx}
+

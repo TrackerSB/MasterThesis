@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<environment xmlns="http://drivebuild.com"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://drivebuild.com drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <timeOfDay>0</timeOfDay>
+    <lanes>
+        {% for i in range(1, numParticipants + 1) %}
+            <lane markings="true">
+                {% set yPos = i * distanceBetweenLanes %}
+                <laneSegment x="-3" y="{{ yPos }}" width="8"/>
+                <laneSegment x="{{ length }}" y="{{ yPos }}" width="8"/>
+            </lane>
+        {% endfor %}
+    </lanes>
+    <obstacles>
+        {% for i in range(1, numParticipants + 1) %}
+            {% set yPos = (i + 0.5) * distanceBetweenLanes %}
+            <cube x="{{ length/2 }}" y="{{ yPos }}" width="1" length="{{ length + 6 }}" height="5"/>
+        {% endfor %}
+    </obstacles>
+</environment>

@@ -1,0 +1,47 @@
+- Interface
+    - AI
+        - Use client
+        - start(sid, vid)
+        - getControl(...)  # FIXME needed?
+        - stop(sid)
+        - NOT allowed to SUCCESS or FAILURE a test
+    - Test generator
+        - Do NOT use client
+        - getTest()
+            - Returns XML => start simulation
+            - Returns None => Generation finished
+        - start()
+        - fail(errormessage/trace)
+        - trace == list of DataResponse
+        - stop(sid)
+        - Error interface? (Tell the generator that XML was invalid)  # FIXME needed?
+        - Allow to CANCEL simulations
+- Required for manageging the challenge
+    - Test management
+        - Setup test generation
+        - Call test generation
+        - Setup AIs for all spawned vehicles
+        - Fixed snippets for failure (damage and offroad)
+        - Insert content of failure tag
+        - Compare with BeamNG AI
+            - getTest() --> XML
+            - Duplicate XML
+            - Replace AUTONOMOUS with TRAINING
+            - FIXME Should do it?
+        - Detect whether an AI or a test generator forced SUCCESS/FAILURE of a test
+        - After a test finished: Pass collected data to test generator
+        - Check for new data (FIXME Introduce timestamps?)
+    - Challenge evaluation
+        - Test generator
+            - Number of unique failure
+                - damage vs offroad
+                - same position?
+                - same speed/direction or velocity vector?
+                - introduce tolerances
+            - Number of tests
+            - Average time of generating tests
+- Conventions
+    - Test generation
+        - Autonomous car name: ego
+        - Restricted to ONE autonomous car
+        - Empty failure tag

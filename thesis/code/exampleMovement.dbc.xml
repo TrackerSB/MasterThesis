@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<criteria xmlns="http://drivebuild.com"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://drivebuild.com drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <version>1</version>
+    <name>Test A</name>
+    <environment>environmentA.dbe.xml</environment>
+    <stepsPerSecond>10</stepsPerSecond>
+    <aiFrequency>50</aiFrequency>
+
+    <participants>
+        <participant id="ego" model="ETK800">
+            <initialState x="1" y="-3" movementMode="MANUAL" orientation="-38" speedLimit="30"/>
+            <ai>
+                <!-- [..] AI request data definition -->
+            </ai>
+            <movement>
+                <waypoint x="25" y="-12" movementMode="MANUAL" tolerance="1"/>
+                <waypoint x="53" y="0" movementMode="MANUAL" tolerance="1"/>
+                <waypoint x="80" y="18" movementMode="MANUAL" tolerance="1"/>
+                <waypoint x="98" y="19" movementMode="MANUAL" tolerance="1"/>
+            </movement>
+        </participant>
+        <participant id="nonEgo" model="ETK800">
+            <initialState x="50" y="-27" movementMode="MANUAL" orientation="110" speedLimit="10"/>
+            <movement>
+                <waypoint x="30" y="20" movementMode="MANUAL" tolerance="1"/>
+            </movement>
+        </participant>
+    </participants>
+
+    <!-- [...] Criteria definition -->
+</criteria>

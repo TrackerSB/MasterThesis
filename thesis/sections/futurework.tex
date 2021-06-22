@@ -1,0 +1,26 @@
+%!TEX root = ../thesis.tex
+\section{Future Work}
+\drivebuild{} does not provide any visual feedback that shows more than camera images of participants.
+Visual feedback is very important to get feedback about the generated environments and to get an intuitive understanding of the movement of \glspl{av}.
+For the visualization a format like \gls{rosbag}~\cite{rosbag} could be introduced.
+\Gls{rosbag} is a format which stores sequences of pixel clouds to represent a simulation.
+This allows to visually debug simulations in 3D and rewind a simulation forward and backward.
+Already a simple visual representation (\eg{} a bird view like screenshot) of the environment as well as the initial states, positions and orientations of participants in this environment might be interesting for testers to get an idea about the setup of a test before it is executed.
+There is already an ongoing project which plans to extend \drivebuild{} with a debugger which visualizes the simulation and allows to define breakpoints, to pause and resume simulations plus to dynamically evaluate expressions during a simulation.\\
+Concerning the initial orientation of participants \drivebuild{} defines angles relative to the ground.
+The experience of this work shows that for test generators it would be easier to specify the initial orientation of participants relative to the underlying road instead of the ground.\\
+To determine whether an \gls{av} is off-road, drives on a certain road or is within a certain region \drivebuild{} uses either the bounding box or the center position of the \gls{av}.
+In order to cooperate with \beepbeep{}~\cite{beepbeep} future work should formalize these checks more precisely.\\
+The load balancing of \drivebuild{} considers only the number of currently running tests on any \gls{simnode}.
+A prediction of the resulting load of a simulation based on characteristics of submitted \glspl{dbe} and \glspl{dbc} may improve the load balancing.
+To further improve the load balancing certain messages like \enquote{stop} may have a higher priority whereas messages that start new simulations may have a lower priority.
+The priority of messages may be also dependent on the estimated remaining execution time of running simulations or their progress.\\
+Currently \drivebuild{} is only able to generate road markings for single roads which do not change their width and the number of lanes.
+Future work may improve road markings by considering junctions, varying number of lanes, variable road width and more types of road markings including broken or dirty road markings.\\
+A future version of \drivebuild{} may be able to set different weather conditions including rain, snow and slippery roads to check whether and compare how well \glspl{av} can cope with it.\\
+\drivebuild{} provides training data in terms of traces (see \cref{fig:databaseScheme}).
+To provide even more training data future work may introduce additional approaches like \scenic{} which uses the previously collected data to generate even further new data.
+Training data may also include the reasons why tests failed or succeeded.
+Therefore it is required to detect in case the failure or success criterion was triggered which elements of the representing temporal logic expression were involved to fulfill the criterion.\\
+In future versions \drivebuild{} may also ship with a predefined set of test generators and \glspl{ai}.
+Therefore it may be interesting to allow a test setup for an \gls{ai} to specify restrictions on the generated roads like disallowing self intersection of roads.

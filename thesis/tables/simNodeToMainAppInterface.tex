@@ -1,0 +1,21 @@
+%!TEX root = ../thesis.tex
+\def\tabularxcolumn#1{m{#1}}
+\begin{tabularx}{.75\linewidth}{X l l}
+    \toprule
+    \bfseries Action & \bfseries Parameter Types & \bfseries Return Type \\
+    \midrule
+    runTests & \makecell[l]{User\\zip byte data} & SubmissionResult \\
+    \midrule
+    waitForSimulatorRequest & \makecell[l]{SimulationID\\VehicleID} & SimStateResponse \\
+    \midrule
+    control & \makecell[l]{SimulationID\\VehicleID\\Control} & Void \\
+    \midrule
+    requestData & \makecell[l]{SimulationID\\VehicleID\\DataRequest} & DataResponse \\
+    \midrule
+    stop & \makecell[l]{SimulationID\\TestResult} & Void \\
+    \midrule
+    runningTests & User & SubmissionResult \\
+    \midrule
+    requestSocket & --- & Void \\
+    \bottomrule
+\end{tabularx}

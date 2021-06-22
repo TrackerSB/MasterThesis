@@ -1,0 +1,5 @@
+lxml
+shapely
+drivebuild-client
+numpy
+pg8000

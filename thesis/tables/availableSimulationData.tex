@@ -1,0 +1,18 @@
+%!TEX root = ../thesis.tex
+\begin{tabularx}{\linewidth}{l X c}
+    \toprule
+    \bfseries Type          & \bfseries Description                                                             & \bfseries Sensor Data \\
+    \midrule
+    position                & Absolute position of an \gls{av}                                                  & \ding{53}             \\
+    speed                   & Absolute speed of an \gls{av}                                                     & \checkmark{}          \\
+    steering angle          & Current steering angle of the steering wheel                                      & \checkmark{}          \\
+    \Glstext{lidar}         & Distance data provided by a \gls{lidar} sensor                                    & \checkmark{}          \\
+    camera                  & Camera images either colored, annotated or with depth information                 & \checkmark{}          \\
+    damage                  & Detects whether an \gls{av} is damaged                                            & \checkmark{}          \\
+    distance to road center & Distance to the center of the nearest road                                        & \ding{53}             \\
+    heading angle           & Angle between the orientation of a participant and the center of the nearest road & \ding{53}             \\
+    bounding box            & The bounding box of a participant                                                 & \ding{53}             \\
+    road edges              & Sequences of points for the right and left edge of a road                         & \ding{53}             \\
+    \bottomrule
+\end{tabularx}
+

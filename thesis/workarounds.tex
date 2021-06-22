@@ -1,0 +1,67 @@
+% Make refcheck recognize cleveref
+% \makeatletter
+% \newcommand{\refcheckize}[1]{
+%     \expandafter\let\csname @@\string#1\endcsname#1
+%     \expandafter\DeclareRobustCommand\csname relax\string#1\endcsname[1]{
+%         \csname @@\string#1\endcsname{##1}\wrtusdrf{##1}
+%     }
+%     \expandafter\let\expandafter#1\csname relax\string#1\endcsname
+% }
+% \makeatother
+% \refcheckize{\cref}
+% \refcheckize{\Cref}
+
+% List used and unused commands
+% Based on https://tex.stackexchange.com/a/488798/187883
+\makeatletter
+ % This macro will contain all the tracked commands:
+ \def\@mycommands{}
+ % These macros enable and disable tracking the commands:
+ \def\starttrackingnewcommands{%
+     \let\old@@newcommand\@newcommand%
+     \def\@newcommand##1{%
+         \expandafter\def\expandafter\@mycommands\expandafter{\@mycommands\oneof@mycommands##1}%
+         \old@@newcommand##1%
+     }%
+ }
+ \def\stoptrackingnewcommands{%
+     \let\@newcommand\old@@newcommand%
+ }
+ % These macros are used to write to the log file:
+ \def\mycommand@used#1{\typeout{My command `\string#1' was used.}}
+ \def\mycommand@unused#1{%
+     \GenericWarning{(mycommands)}{LaTeX Warning:
+         My command `\string#1' was not used!%
+     }%
+ }
+ % These macros mark a command as used or unused:
+ \def\mycommand@markunused#1{%
+     \expandafter\gdef\csname mycommand@status@\expandafter\@gobble\string#1\endcsname{\mycommand@unused#1}%
+     \pretocmd#1{\mycommand@markused#1}{}{\GenericWarning{(mycommands)}{Could not patch `\string#1' as unused!}}%
+     \aftergroup\mycommand@markunused\aftergroup#1%
+ }
+ \def\mycommand@markused#1{%
+     \expandafter\gdef\csname mycommand@status@\expandafter\@gobble\string#1\endcsname{\mycommand@used#1}%
+     \patchcmd#1{\mycommand@markused#1}{}{}{\GenericWarning{(mycommands)}{Could not patch `\string#1' as used!}}%
+     \aftergroup\mycommand@markused\aftergroup#1%
+ }
+ % This macro calls the appropriate logging macro for a command:
+ \def\mycommand@evaluateuse#1{%
+     \csname mycommand@status@\expandafter\@gobble\string#1\endcsname
+ }
+ % Mark all commands as unused at \begin{document}:
+ \AtBeginDocument{%
+     \let\oneof@mycommands\mycommand@markunused%
+     \@mycommands%
+ }
+ % Evaluate the use of the commands at \end{document}:
+ \AtEndDocument{%
+     \let\oneof@mycommands\mycommand@evaluateuse%
+     {\let\mycommand@unused\@gobble% first, only the used commands
+         \@mycommands%
+     }{\let\mycommand@used\@gobble% then, only the unused commands
+         \@mycommands%
+     }%
+ }
+\makeatother
+

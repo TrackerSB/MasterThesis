@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<criteria xmlns="http://drivebuild.com"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://drivebuild.com drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <version>1</version>
+    <name>{{ testName }}</name>
+    <environment>{{ dbeFileName }}</environment>
+    <stepsPerSecond>50</stepsPerSecond>
+    <aiFrequency>5</aiFrequency>
+
+    {% set participantPrefix = "ego_" %}
+
+    <participants>
+        {% for i in range(1, numParticipants + 1) %}
+            {% set participantID = participantPrefix + i|string %}
+            <participant id="{{ participantID }}" model="ETK800">
+                {% set yPos = i * distanceBetweenLanes %}
+                <initialState x="0" y="{{ yPos }}" movementMode="{{ movementMode }}" orientation="0"/>
+                <movement>
+                    <waypoint x="{{ length }}" y="{{ yPos }}" movementMode="{{ movementMode }}" tolerance="1"/>
+                </movement>
+            </participant>
+        {% endfor %}
+    </participants>
+
+    <success>
+        {% if numParticipants > 1 %}
+            <or>
+        {% endif %}
+        {% for i in range(1, numParticipants + 1) %}
+            {% set participantID = participantPrefix + i|string %}
+            {% set yPos = i * distanceBetweenLanes %}
+            <scPosition participant="{{ participantID }}" x="{{ length }}" y="{{ yPos }}" tolerance="{{ laneWidth / 2 }}"/>
+        {% endfor %}
+        {% if numParticipants > 1 %}
+            </or>
+        {% endif %}
+    </success>
+
+    <failure>
+        <or>
+            {% for i in range(1, numParticipants + 1) %}
+                {% set participantID = participantPrefix + i|string %}
+                <scDamage participant="{{ participantID }}"/>
+                <scLane participant="{{ participantID }}" onLane="offroad"/>
+            {% endfor %}
+        </or>
+    </failure>
+</criteria>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<criteria xmlns="http://drivebuild.com"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://drivebuild.com drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <version>1</version>
+    <name>TwoCarsCrash</name>
+    <environment>environment.dbe.xml</environment>
+    <stepsPerSecond>50</stepsPerSecond>
+    <aiFrequency>10</aiFrequency>
+
+    <participants>
+        <participant id="ego" model="ETK800">
+            <initialState x="0" y="0" movementMode="TRAINING" orientation="0"/>
+            <ai>
+                <position id="ego_position"/>
+                <damage id="ego_damage"/>
+            </ai>
+            <movement>
+                <waypoint x="100" y="0" movementMode="TRAINING" tolerance="1"/>
+            </movement>
+        </participant>
+    </participants>
+
+    <success>
+        <scPosition participant="ego" x="100" y="0" tolerance="2"/>
+    </success>
+
+    <failure>
+        <or>
+            <scDamage participant="ego"/>
+            <scLane participant="ego" onLane="offroad"/>
+        </or>
+    </failure>
+</criteria>

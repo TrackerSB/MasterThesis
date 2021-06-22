@@ -1,0 +1,9 @@
+\begin{sequencediagram}
+    \newthread{a}{:A}
+    \tikzstyle{inststyle}+=[below right=-0.82cm and 4cm of a]  % FIXME Workaround for newthread distance
+    \newthread{b}{:B}
+    \begin{callself}{b}{Wait for complete sub-messages}{}
+        \mess{a}{content length}{b}
+        \mess{a}{content}{b}
+    \end{callself}
+\end{sequencediagram}

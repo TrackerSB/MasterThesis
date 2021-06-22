@@ -1,0 +1,67 @@
+%!TEX root = ../thesis.tex
+\section{Appendix}
+\FloatBarrier%
+\subsection{Code Example Snippets}
+\begin{figure}[h]
+    \captionsetup{type=listing}
+    \inputminted{xml}{code/exampleEnvironment.dbe.xml}
+    \medskip
+    \caption{%
+        Example environment description --- This example shows a basic environment description defining two roads.
+        \Cref{fig:exampleEnvironmentVis} shows the resulting generated roads.
+    }\label{fig:exampleEnvironment}
+\end{figure}
+\begin{figure}[h]
+    \captionsetup{type=listing}
+    \inputminted{xml}{code/exampleMovement.dbc.xml}
+    \medskip
+    \caption{%
+        Example participant description --- This example shows an example of positioning a participant, defining its movement and which data its \gls{ai} requires.
+    }\label{fig:exampleParticipant}
+\end{figure}
+\begin{figure}[h]
+    \captionsetup{type=listing}
+    \inputminted{xml}{code/exampleObstacleDefinitions.xml}
+    \medskip
+    \caption{%
+        Example obstacle definitions --- This snippet demonstrates the creation of all available types of static obstacles.
+        \Cref{fig:exampleEnvironmentVis} shows a visualization of generated obstacles.
+    }\label{fig:exampleObstacleDefinitions}
+\end{figure}
+\begin{figure}[h]
+    \captionsetup{type=listing}
+    \inputminted{xml}{code/exampleAIDataRequests.xml}
+    \medskip
+    \caption{%
+        Examples for \gls{ai} request data --- This snippet shows all supported types of data that an \gls{av} can request.
+    }\label{fig:exampleAIDataRequests}
+\end{figure}
+\begin{figure}[h]
+    \captionsetup{type=listing}
+    \inputminted{xml}{code/exampleCriteria.dbc.xml}
+    \medskip
+    \caption{%
+        Example criteria definition --- This snippet shows example definitions for all types of criteria listed in \cref{tab:criteriaTypes}.
+        The tag names are built from either the prefix \enquote{vc} or \enquote{sc} and the type name of the criterion.
+        To spare duplication the prefix \enquote{x} is used here to denote that the prefix might be either \enquote{vc} or \enquote{sc}.
+    }\label{fig:exampleCriteria}
+\end{figure}
+
+\FloatBarrier%
+\subsection{Determine Target Position for A0}\label{subsec:targetPositionDetermination}
+The test generators did not obey the restrictions to the target position that A0 (see \cref{subsubsec:submissions}) introduces.
+So in case of A0 the \submissiontester{} has to replace the declared target position with a target position which is valid for A0.
+Therefore the \submissiontester{} collects all \code{scPosition} elements within the tag of the success criterion which are associated with the \gls{av}.
+If there is exactly one element this defines the target position.
+If there are more than one the generated test is considered invalid since the test seems to have a branch in its result.
+If there are no \code{scPosition} elements the \submissiontester{} collects all associated \code{scArea} elements within the success criterion that are associated with the \gls{av}.
+If there is more than one element the test is again considered invalid since it seems to have a branch in its result.
+Only if there is exactly one such element the \submissiontester{} computes the intersection with all roads in the \gls{dbe} and determines all road center points that lie within.
+The \submissiontester{} uses one of these points as target position.
+If there is no such road center point or there was no associated \code{scArea} the \submissiontester{} uses the last waypoint of the movement which the \gls{dbc} specifies for the \gls{av}.
+
+\FloatBarrier%
+\subsection{Used Tools}
+% FIXME Including these commands causes problems in the compilation of everything that follows
+\LTXtable{\textwidth}{tables/usedTools.tex}
+\LTXtable{\textwidth}{tables/stUsedTools.tex}

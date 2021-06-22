@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<environment xmlns="http://drivebuild.com"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://drivebuild.com drivebuild.xsd">
+    <author>Stefan Huber</author>
+    <timeOfDay>0</timeOfDay>
+
+    <lanes>
+        
+        <lane leftLanes="1" rightLanes="1">
+            
+            <laneSegment x="-105.0" y="-79.70129403554625" width="8.0"/>
+            
+            <laneSegment x="-97.03477228376762" y="-73.65520873772226" width="8.0"/>
+            
+            <laneSegment x="-87.85432405741568" y="-67.29820446739541" width="8.0"/>
+            
+            <laneSegment x="-78.15476077938774" y="-61.76551930147332" width="8.0"/>
+            
+            <laneSegment x="-68.00990198298602" y="-57.09926031479533" width="8.0"/>
+            
+            <laneSegment x="-54.69477481270877" y="-50.97479539478046" width="8.0"/>
+            
+            <laneSegment x="-41.96409801029711" y="-43.71314611450772" width="8.0"/>
+            
+            <laneSegment x="-29.914759713210188" y="-35.369578009703716" width="8.0"/>
+            
+            <laneSegment x="-18.63846266147825" y="-26.007590671630147" width="8.0"/>
+            
+            <laneSegment x="-8.22102628447928" y="-15.698434476852285" width="8.0"/>
+            
+            <laneSegment x="1.258266436737685" y="-4.520568328851084" width="8.0"/>
+            
+            <laneSegment x="6.22361024308944" y="1.334504415340012" width="8.0"/>
+            
+            <laneSegment x="11.68036263104129" y="6.734538612604597" width="8.0"/>
+            
+            <laneSegment x="17.586994420043744" y="11.638436742071693" width="8.0"/>
+            
+            <laneSegment x="23.898552575660705" y="16.008877177921406" width="8.0"/>
+            
+            <laneSegment x="30.567002329304916" y="19.812598229492824" width="8.0"/>
+            
+            <laneSegment x="37.5415927518311" y="23.020651282833935" width="8.0"/>
+            
+            <laneSegment x="44.76924299875098" y="25.60862111713341" width="8.0"/>
+            
+            <laneSegment x="52.19494628751098" y="27.55681171929332" width="8.0"/>
+            
+            <laneSegment x="59.762188532321375" y="28.85039618248159" width="8.0"/>
+            
+            <laneSegment x="67.41337845047337" y="29.479529547845686" width="8.0"/>
+            
+            <laneSegment x="75.09028586677505" y="29.439423730594093" width="8.0"/>
+            
+            <laneSegment x="82.73448488034494" y="28.73038396021265" width="8.0"/>
+            
+            <laneSegment x="85.16673002102625" y="28.50478039690946" width="8.0"/>
+            
+            <laneSegment x="87.60938238075862" y="28.49201945505668" width="8.0"/>
+            
+            <laneSegment x="90.04385190017061" y="28.692198253127078" width="8.0"/>
+            
+            <laneSegment x="92.45161079624665" y="29.10379330959607" width="8.0"/>
+            
+            <laneSegment x="94.81433456994301" y="29.723672137556047" width="8.0"/>
+            
+            <laneSegment x="97.11404146669025" y="30.547117084833154" width="8.0"/>
+            
+            <laneSegment x="99.33322932840312" y="31.567861238168963" width="8.0"/>
+            
+            <laneSegment x="101.45500879547174" y="32.77813611821442" width="8.0"/>
+            
+            <laneSegment x="103.46323184498623" y="34.16873080234842" width="8.0"/>
+            
+            <laneSegment x="105.34261468694154" y="35.729062025360676" width="8.0"/>
+            
+            <laneSegment x="107.07885408310806" y="37.447254724490314" width="8.0"/>
+            
+            <laneSegment x="108.65873620331088" y="39.31023241582385" width="8.0"/>
+            
+            <laneSegment x="110.0702371906564" y="41.303816714233534" width="8.0"/>
+            
+            <laneSegment x="111.3026146703433" y="43.41283523944937" width="8.0"/>
+            
+            <laneSegment x="112.34648950562129" y="45.62123708703425" width="8.0"/>
+            
+        </lane>
+        
+    </lanes>
+</environment>

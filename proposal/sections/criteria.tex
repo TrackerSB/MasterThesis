@@ -1,0 +1,25 @@
+%!TEX root = ../proposal.tex
+\section{Success criteria}
+The system to develop shall satisfy all Must-Have requirements to be considered as successful.
+\begin{description}
+    \item[Requirement R1] The system shall be able to convert a given formalized test scenario into a \beamng{} scenario.
+        The simulation shall contain roads, traffic participants and obstacles and shall simulate the movement specified in the test case.
+    \item[Requirement R2] The system shall be able to simulate multiple generated \beamng{} scenarios simultaneously.
+    \item[Requirement R3] The system shall be able to continuously evaluate test criteria during simulation time.
+    \item[Requirement R4] The system shall collect executed test cases and their execution results.
+    \item[Requirement R5] The system shall measure the execution time of test criteria verifications. \draft{FIXME Really?}
+    \item[Requirement R6] The system shall provide a service granting access to the collected data. \draft{FIXME StatsManager?}
+\end{description}
+
+The system should implement May-Have criteria to further increase the capabilities provided to users of the system.
+\begin{description}
+    \item[Requirement M1] The system should provide predefined test suites for training \glspl{ai}.
+\end{description}
+
+This work will neither focus nor implement the following aspects.
+\begin{description}
+    \item[Requirement N1] The system will not support test cases that require real time capabilities.
+    \item[Requirement N2] The system will not support running simulations on various Linux distributions or MacOS.
+    \item[Requirement N3] There will not be the opportunity to simulate participants with a custom shape and physics that are not provided by the simulator.
+    \item[Requirement N4] The system will not be able to create log files for replaying and debugging simulations \eg{} ROSBAG files.
+\end{description}

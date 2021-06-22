@@ -1,0 +1,25 @@
+%!TEX root = ../thesis.tex
+\begin{sequencediagram}
+    \newthread{simcontroller}{:Runtime Verification}
+    \tikzstyle{inststyle}+=[below right=-0.82cm and 5cm of simcontroller]  % FIXME Workaround for newthread distance
+    \newthread{simnode}{:\Glstext{simcontroller}}
+    \begin{call}{simcontroller}{vids}{simnode}{VehicleIDs}
+    \end{call}
+    \begin{sdblock}{Loop cycle}{While simulation running}
+        \begin{call}{simcontroller}{verify}{simnode}{VerificationResult}
+        \end{call}
+        \begin{call}{simcontroller}{pollSensors}{simnode}{Void}
+        \end{call}
+        \begin{sdblock}{For each \glstext{av}}{}
+            \begin{call}{simcontroller}{requestAiFor}{simnode}{Void}
+                \postlevel%
+            \end{call}
+        \end{sdblock}
+        \prelevel\prelevel\prelevel%
+        \begin{callself}{simcontroller}{Wait for control commands}{Apply control commands}
+            \postlevel\postlevel%
+        \end{callself}
+        \begin{call}{simcontroller}{steps}{simnode}{Void}
+        \end{call}
+    \end{sdblock}
+\end{sequencediagram}
