@@ -1,0 +1,23 @@
+[font_size]
+28
+[notes]
+### 1
+- I am Stefan Huber
+- Master thesis
+- Chair Fraser
+- 8 months
+### 2
+- Typical problems
+### 4
+- Declarative (XML)
+- Verifiable
+- Synchronous simulation
+- Check declared test criteria
+- Collect data (evaluation/analysis/training)
+### 5
+- No visual feedback => Install on own laptop
+- Meant as web service
+- Theoretically distribute
+- You == client + AI
+### 6
+Programming == client + AI

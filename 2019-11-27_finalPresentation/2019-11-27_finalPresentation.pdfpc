@@ -1,0 +1,183 @@
+[font_size]
+30
+[notes]
+### 1
+- Introduce yourself
+- Slowly repeat title
+### 2
+- Fatal crashes high
+### 3
+- Common causes
+- Promise AVs solve it
+### 4
+- Promise to safe the world
+### 5
+- Many working on it
+### 6
+- Invest billions of dollars
+### 7
+- They don't
+### 8
+- More AVs => More crashes
+### 9
+- Testing required
+### 10
+- Very expensive
+### 11
+- Very time consuming
+### 12
+- Much cheaper
+- Not multiple cars
+- Respawn on crash
+- Much faster (parallel)
+- Much more miles
+--> Train AIs
+### 13
+- What do testers need?
+- For simulation based testing
+### 14
+- I read many papers about
+  - TGs
+  - AIs
+  - Testing
+### 15
+- Involved in seminar
+- Students as testers
+- Submit either TG or AI
+- Interact/Help during semester
+### 16
+- Goals:
+- Training
+- Checking
+- Analyze AI/TG
+### 17
+- BeamNG => Accuracy
+- Distribute => Speedup
+- Exchange data
+- Verify criteria
+- Train AI
+- Standardized representation
+- Still time consuming
+- Still very complex
+### 18
+- "Solve by coping with"
+- Cope with 4 aspects that solve it
+- What do these aspects solve?
+- And how?
+### 19
+- Declarative
+- No need to cope with
+  - Sensors
+  - Interpolation/Markings
+  - Verification
+- XML can be
+  - verified
+  - generated
+  - well known
+### 20
+- Distribute:
+  - Heavy load
+  - Speed up
+  - Share resources
+- Micro services:
+  - Main entry point
+  - Homogenous interface (testers, researchers, AIs)
+  - Do not expose AI
+  - HTTP (easy, well known, error handling)
+### 21
+- What is runtime verification
+- Distributed
+=> Network problems
+  - Reliability
+  - Delay (Especially data exchange)
+  - Load
+=> Falsify measurements
+- Two processes
+- Wait for each other
+=> Synchronize
+--> No real-time
+### 22
+- Exchange serialized message
+- No simple strings/numbers
+- Exchange of complete objects
+- Attributes (semantic)
+- Minimum level type safety
+- Detect broken messages (no recovery yet)
+- Uniform representation (all communication, DBMS)
+- (Safes a few bytes)
+### 23
+- Support of various approaches?
+- Scale over machines and VMs?
+- Which/How many benefits in usage?
+- Unburdens testers from shared problems?
+### 24
+- Seminar (AIs and TGs)
+- Simple interface sufficient
+
+- Generate test
+- Check AI passes
+- For each combination (4 TGs and 2/3 AIs)
+### 25
+- Supports  well enough
+- Abstraction for data requirements
+- Abstraction for criteria check
+
+- Quality of AIs and TGs
+- Traveled dist on road
+=> Where failed?
+### 26
+Single test
+Lane keeping scenario
+- Single road
+- Perfect knowledge about lanes
+=> Succeed
+
+Increase load
+Timeout => Too much load
+### 27
+- Setup
+  - One real machine (laptop)
+  - Simultaneous execution
+- Analysis
+  - No timeouts (Enough for laptop)
+  - Length of single test
+  - Red = sequentially
+  - Blue = parallel
+  => Utilize parallelism
+  - Sufficient (Since limit)
+--> Multiple nodes...
+### 28
+- Setup
+  - 1, 2 or 3 VMs
+  - SLURM cluster
+  - Unshared GPU
+- Analysis
+  - Many timeouts
+  => Unreliable
+  - Load of cluster?
+  - Communication?
+  - Took over a week
+  - Previous a few hours
+### 29
+- Further research about VMs
+- Interesting range of tests
+### 30
+- How supportive to students?
+- Serialize/deserialize
+- Structure of data? (debugger?)
+- How declare required data?
+- Simple logic expression ("or")
+- So I included fail criterion
+- Further research:
+- Full capacity: Temporal logic
+- XML/XSD?!
+### 31
+Crashes
+=> Testing (expensive)
+=> simulations (test/investigate)
+=> How requirements
+=> Able to cope and support
+### 32
+- No visual feedback
+- Debugger
+- Contact to other research groups (interested in output)
